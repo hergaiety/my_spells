@@ -12,16 +12,16 @@ let tooltipCounter = () => tooltipCount++;
 /**
  * Discover Classes
  */
-let classes = [];
 const DISCOVERCLASSES = spells => {
-    let itemsFound = [];
+    let classes = [];
     spells.forEach(spell => {
         if (!spell.classes) return;
         spell.classes.forEach(current => {
-            if (!itemsFound.includes(current)) itemsFound.push(current);
+            if (!classes.includes(current)) classes.push(current);
         });
     });
-    return itemsFound = itemsFound.sort((a, b) => a > b);
+    classes = classes.sort((a, b) => a > b);
+    return {spells, classes}
 };
 
 /**
@@ -67,7 +67,7 @@ const DOMHELPER = {
         });
         return dom;
     },
-    classes (tags) {
+    classes (classes) {
         let dom = '';
         classes.forEach(x => {
             dom += `<a>${capitalize(x)}</a>&nbsp;`;
@@ -84,9 +84,9 @@ const SELECTEDSPELLS = () => $('#form-spells').serializeArray().map(spell => par
 /**
  * Add Spells to Page
  */
-const RENDERSPELLS = items => {
+const RENDERSPELLS = data => {
     let dom = '';
-    let spells = items.slice(0);
+    let spells = data.spells.slice(0);
     spells = spells.sort((a, b) => b.ranking - a.ranking);
     spells.forEach(spell => {
         let el = $('#spell-item').html();
@@ -106,6 +106,7 @@ const RENDERSPELLS = items => {
     });
     $('#spell-list').html(dom);
     componentHandler.upgradeDom();
+    return data;
 };
 
 /**
@@ -125,7 +126,7 @@ const RENDERSPELLDIALOG = spell => {
     }
     if (spell.tags) {
         $('[data-id-spelldetail=classes]', $el)[0].innerHTML
-            = DOMHELPER.classes(spell.tags);
+            = DOMHELPER.classes(spell.classes);
     }
     if (spell.components) {
         $('[data-id-spelldetail=components]', $el)[0].innerHTML
@@ -160,18 +161,19 @@ const RENDERSPELLDIALOG = spell => {
 /**
  * Fetch Classes from Spells
  */
-const RENDERCLASSES = (spells, classes = []) => {
+const RENDERCLASSES = data => {
     let dom = '';
-    classes.forEach(item => {
+    data.classes.forEach(item => {
         let el = $('#class-toggle').html();
         let $el = $(el);
 
+        $('[data-action-classtoggle]', $el).attr('value', item);
         $('[data-id-classtoggle=name]', $el)[0].innerHTML = item;
         dom += $el.prop('outerHTML');
     });
     $('#class-list').html(dom);
 
-    return spells;
+    return data;
 };
 
 /**
@@ -187,12 +189,9 @@ fetch('./spells.json')
         return spell;
     }))
     .then(spells => data = spells)
-    .then(spells => {
-        classes = DISCOVERCLASSES(spells);
-        return spells;
-    })
-    .then(spells => RENDERCLASSES(spells, classes))
-    .then(spells => RENDERSPELLS(spells))
+    .then(spells => DISCOVERCLASSES(spells))
+    .then(data => RENDERCLASSES(data))
+    .then(data => RENDERSPELLS(data))
     .catch(reason => console.error('Unable to retrieve spells list:', reason));
 
 /**
@@ -236,6 +235,19 @@ $('label[for=table-header]').on('change', 'input[type="checkbox"]', e => {
 });
 
 /**
+ * Bind Class Filter Switches
+ */
+$('body').on('change', '[data-action-classtoggle]', e => {
+    let filterClasses = $(e.target).closest('form').serializeArray().map(x => x.value);
+    let spells = filterClasses.length ? data.filter(spell => {
+        for(let i = 0; i < filterClasses.length; i++) {
+            if (spell.classes.indexOf(filterClasses[i]) >= 0) return true;
+        }
+    }) : data;
+    RENDERSPELLS({spells});
+});
+
+/**
  * Search
  */
 $('body').on('change keyup cut paste', '[data-action-search]', e => {
@@ -256,7 +268,7 @@ $('body').on('change keyup cut paste', '[data-action-search]', e => {
                 spell.ranking = matches;
                 return spell.ranking > 0;
             });
-            RENDERSPELLS(filteredData);
+            RENDERSPELLS({spells: filteredData});
         } else RENDERSPELLS(data);
     }, 0);
 });

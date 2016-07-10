@@ -9,8 +9,5 @@
   "author": "Joe Wroten <sharpshark28@gmail.com>",
   "license": "ISC",
   "devDependencies": {},
-  "dependencies": {
-    "express": "^4.14.0",
-    "redux": "^3.5.2"
-  }
+  "dependencies": {}
 }

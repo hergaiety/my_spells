@@ -26,7 +26,10 @@
             </header>
             <aside class="mdl-layout__drawer">
                 <span class="mdl-layout-title">My Spells</span>
-                <nav class="mdl-navigation" id="class-list"></nav>
+                <nav class="mdl-navigation">
+                    <form id="class-list">
+                    </form>
+                </nav>
             </aside>
             <main class="mdl-layout__content">
                 <div class="page-content">
@@ -118,7 +121,7 @@
         <script id="class-toggle" type="x-template">
             <label class="mdl-navigation__link">
                 <div class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
-                    <input type="checkbox" class="mdl-switch__input">
+                    <input data-action-classtoggle name="class" type="checkbox" class="mdl-switch__input">
                     <span data-id-classtoggle="name" class="mdl-switch__label"></span>
                 </div>
             </label>
