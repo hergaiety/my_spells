@@ -269,6 +269,6 @@ $('body').on('change keyup cut paste', '[data-action-search]', e => {
                 return spell.ranking > 0;
             });
             RENDERSPELLS({spells: filteredData});
-        } else RENDERSPELLS(data);
+        } else RENDERSPELLS({spells: data});
     }, 0);
 });
