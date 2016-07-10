@@ -1,0 +1,16 @@
+{
+  "name": "my_spells_5e",
+  "version": "1.0.0",
+  "description": "5e Spells by Class",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joe Wroten <sharpshark28@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.14.0",
+    "redux": "^3.5.2"
+  }
+}
