@@ -84,9 +84,11 @@ const SELECTEDSPELLS = () => $('#form-spells').serializeArray().map(spell => par
 /**
  * Add Spells to Page
  */
-const RENDERSPELLS = data => {
+const RENDERSPELLS = (x) => {
     let dom = '';
-    let spells = data.spells.slice(0);
+    let spells = x ? x.spells.slice(0) : data;
+    spells = CLASSSPELLS(spells);
+    spells = SEARCHSPELLS(spells);
     spells = spells.sort((a, b) => b.ranking - a.ranking);
     spells.forEach(spell => {
         let el = $('#spell-item').html();
@@ -176,6 +178,36 @@ const RENDERCLASSES = data => {
     return data;
 };
 
+const SEARCHSPELLS = (spells, search = $('[data-action-search]').val()) => {
+    search = search.toLowerCase();
+    if (search.length >= 3) {
+        spells = spells.filter(spell => {
+            let regFind = new RegExp(search, 'gi');
+            let spellName = spell.name.toLowerCase();
+            let spellDescription = spell.description ? spell.description.toLowerCase() : '';
+            let spellMaterials = spell.components && spell.components.materials_needed || [];
+
+            let matches = 0
+                + spellName.indexOf(search) > -1 ? 20 : 0
+                + (spellDescription.match(regFind) || []).length
+                + (spellMaterials).filter(com => com.indexOf(search) > -1).length * 10;
+
+            spell.ranking = matches;
+            return spell.ranking > 0;
+        });
+    }
+    return spells;
+};
+
+const CLASSSPELLS = (spells, classes) => {
+    classes = classes || $('#class-list').serializeArray().map(x => x.value);
+    return classes.length ? spells.filter(spell => {
+        for(let i = 0; i < classes.length; i++) {
+            if (spell.classes.indexOf(classes[i]) >= 0) return true;
+        }
+    }) : spells;
+};
+
 /**
  * Retrieve Spells
  */
@@ -238,13 +270,7 @@ $('label[for=table-header]').on('change', 'input[type="checkbox"]', e => {
  * Bind Class Filter Switches
  */
 $('body').on('change', '[data-action-classtoggle]', e => {
-    let filterClasses = $(e.target).closest('form').serializeArray().map(x => x.value);
-    let spells = filterClasses.length ? data.filter(spell => {
-        for(let i = 0; i < filterClasses.length; i++) {
-            if (spell.classes.indexOf(filterClasses[i]) >= 0) return true;
-        }
-    }) : data;
-    RENDERSPELLS({spells});
+    RENDERSPELLS();
 });
 
 /**
@@ -252,23 +278,6 @@ $('body').on('change', '[data-action-classtoggle]', e => {
  */
 $('body').on('change keyup cut paste', '[data-action-search]', e => {
     setTimeout(function() {
-        if (e.target.value.length >= 3) {
-            let filteredData = data.filter(spell => {
-                let search = e.target.value.toLowerCase();
-                let regFind = new RegExp(search, 'gi');
-                let spellName = spell.name.toLowerCase();
-                let spellDescription = spell.description ? spell.description.toLowerCase() : '';
-                let spellMaterials = spell.components && spell.components.materials_needed || [];
-
-                let matches = 0
-                    + spellName.indexOf(search) > -1 ? 20 : 0
-                    + (spellDescription.match(regFind) || []).length
-                    + (spellMaterials).filter(com => com.indexOf(search) > -1).length * 10;
-
-                spell.ranking = matches;
-                return spell.ranking > 0;
-            });
-            RENDERSPELLS({spells: filteredData});
-        } else RENDERSPELLS({spells: data});
+        RENDERSPELLS();
     }, 0);
 });
