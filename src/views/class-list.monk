@@ -1,0 +1,19 @@
+{% if data %}
+    {% for cur of data %}
+        <label class="mdl-navigation__link">
+            <div class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                {% if current.includes(cur) %}
+                    <input checked data-action-classtoggle="{{ cur }}" name="class" type="checkbox" class="mdl-switch__input" />
+                {% else %}
+                    <input data-action-classtoggle="{{ cur }}" name="class" type="checkbox" class="mdl-switch__input" />
+                {% endif %}
+                <span class="mdl-switch__label">
+                    {{ cur }}
+                </span>
+            </div>
+        </label>
+    {% endfor %}
+{% else %}
+    <div class="mdl-spinner mdl-js-spinner is-active"></div>
+{% endif %}
+

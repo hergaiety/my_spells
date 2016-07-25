@@ -3,11 +3,26 @@
   "version": "1.0.0",
   "description": "5e Spells by Class",
   "main": "",
+  "watch": {
+    "views": "views/*.monk"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "views": "monkberry src/views/*.monk --source-map --output dist/view.js",
+    "js": "babel src/app.js --out-file dist/app.js",
+    "develop": "nodemon --watch src -e monk,js --exec 'npm run views && npm run js'"
   },
   "author": "Joe Wroten <sharpshark28@gmail.com>",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {}
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-preset-es2017": "^1.6.1",
+    "nodemon": "^1.10.0",
+    "npm-watch": "^0.1.5"
+  },
+  "dependencies": {
+    "clipboard": "^1.5.12",
+    "jquery": "^3.1.0",
+    "monkberry": "^4.0.7"
+  }
 }

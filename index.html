@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Spells 5e</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.teal-pink.min.css" />
+        <link rel="stylesheet" href="./assets/app.css" />
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <div class="mdl-layout-spacer"></div>
+                    <nav class="mdl-navigation">
+                        <a class="mdl-navigation__link" href="https://dark12222000.github.io/lootsplit/">
+                            <i class="material-icons">local_atm</i>
+                            Loot Split
+                        </a>
+                        <a class="mdl-navigation__link" href="http://paulvmoreau.github.io/BeltFedNPCs/">
+                            <i class="material-icons">people</i>
+                            NPC Generator
+                        </a>
+                        <a class="mdl-navigation__link mdl-color-text--teal-100" href="https://github.com/sharpshark28/my_spells">
+                            <i class="material-icons">code</i>
+                            Fork Me On Github
+                        </a>
+                    </nav>
+                    <div data-action-details="" role="button" tabindex="0"><i class="material-icons">keyboard_arrow_left</i></div>
+                </div>
+            </header>
+            <aside class="mdl-layout__drawer">
+                <span class="mdl-layout-title mdl-color-text--pink-600">
+                    <i class="material-icons">whatshot</i>
+                    My Spells
+                </span>
+                <nav class="mdl-navigation">
+                    <form>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div data-template="search-field"></div>
+                            <label class="mdl-textfield__label" for="sample3">
+                                <i class="material-icons">search</i>
+                                Search
+                            </label>
+                        </div>
+                    </form>
+
+                    <form data-template="class-list">
+                    </form>
+                </nav>
+            </aside>
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                    <div class="mdl-grid">
+                        <table id="spell-list-container" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop mdl-data-table mdl-shadow--2dp">
+                            <thead>
+                                <tr data-template="table-sort"></tr>
+                            </thead>
+                            <tbody data-template="spell-list"></tbody>
+                        </table>
+                        <article data-template="spell-details" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop mdl-color-text--grey-600"></article>
+                    </div>
+                </div>
+            </main>
+
+            <div id="toast" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
+            </div>
+        </div>
+
+        <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="./node_modules/monkberry/monkberry.js"></script>
+        <script src="./node_modules/clipboard/dist/clipboard.min.js"></script>
+        <script src="./dist/view.js"></script>
+        <script src="./dist/app.js"></script>
+    </body>
+</html>

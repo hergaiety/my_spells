@@ -1,0 +1,181 @@
+body {
+    background: #fafafa;
+}
+
+.do-nothing {
+    pointer-events: none;
+}
+
+.mdl-layout-title i {
+    position: relative;
+    bottom: -.125em;
+}
+
+#empty {
+    padding-bottom: 100%;
+    text-align: center;
+    background: url('wand.svg') no-repeat top center;
+}
+
+.mdl-navigation .mdl-textfield__label i {
+    vertical-align: top;
+    font-size: 1.25em;
+}
+
+.mdl-navigation .mdl-textfield__input {
+    box-sizing: border-box;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.mdl-navigation .mdl-textfield__label {
+    padding-left: 1em;
+}
+
+ul,
+ol {
+    padding: 0 1em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.page-content {
+    position: relative;
+}
+
+.page-content .mdl-grid {
+    padding: 0;
+}
+
+.page-content .mdl-cell {
+    margin: 0;
+}
+
+[data-template=spell-details] {
+    transition: margin-top 500ms ease-out;
+    padding: 0 2rem;
+}
+
+[data-template=spell-details] .description {
+    max-height: 13em;
+    overflow: auto;
+}
+
+.mdl-layout__header [data-action-details=""] {
+    display: none;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    height: 4rem;
+    width: 4rem;
+}
+
+.mdl-layout__header [data-action-details=""] i {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+[data-template=spell-details] [data-action-details=""] {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+}
+
+@media (max-width: 840px) {
+    [data-template=spell-details] {
+        margin-top: 0 !important;
+    }
+
+    #spell-list-container,
+    [data-template=spell-details] {
+        transition: left 250ms;
+    }
+
+    #spell-list-container {
+        position: absolute;
+        width: 100%;
+        left: 0;
+    }
+
+    body.details #spell-list-container {
+        left: -95%;
+    }
+
+    body.details #spell-list-container::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: black;
+        opacity: .25;
+    }
+
+    [data-template=spell-details] {
+        position: fixed;
+        width: 95%;
+        left: 100%;
+        overflow: auto;
+        max-height: calc(100% - 56px)
+    }
+
+    body.details [data-template=spell-details] {
+        left: 5%;
+    }
+
+    body.details .mdl-layout__header [data-action-details=""] {
+        display: block;
+    }
+
+    body.details .mdl-layout__header .mdl-layout__drawer-button {
+        display: none;
+    }
+
+    body.details [data-template=spell-details] [data-action-details=""] {
+        display: none;
+    }
+}
+
+[data-action-details] {
+    cursor: pointer;
+}
+
+[data-action-sort],
+[data-template=class-list] label,
+.classes,
+.spell-level,
+.spell-name,
+.spell-school {
+    text-transform: capitalize;
+}
+
+[data-action-sort] {
+    cursor: pointer;
+    user-select: none;
+}
+
+[data-action-sort]:hover {
+    background: #eee;
+}
+
+[data-action-sort] i.material-icons.mdl-list__item-icon {
+    position: relative;
+    bottom: -.25em;
+    color: inherit;
+}
+
+#share-url {
+    padding-left: 2em;
+}

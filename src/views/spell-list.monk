@@ -1,0 +1,33 @@
+{% if data.length %}
+    {% for spell of data %}
+        <tr data-action-details="{{ spell.name }}">
+            <td class="spell-name mdl-data-table__cell--non-numeric">
+                <strong>
+                    {{ spell.name }}
+                </strong>
+            </td>
+            <td class="spell-school mdl-data-table__cell--non-numeric">
+                {{ spell.school }}
+            </td>
+            <td class="spell-level">
+                {{ spell.prettyLevel }}
+            </td>
+        </tr>
+    {% endfor %}
+{% else %}
+    <tr class="do-nothing">
+        <td colspan="4">
+            {% if data %}
+                <div class="text-center">
+                    <i class="material-icons mdl-list__item-icon mdl-color-text--orange-600">
+                        warning
+                    </i>
+                    <h5>No Results</h5>
+                    <h6>Try refining your filters in the sidebar.</h6>
+                </div>
+            {% else %}
+                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+            {% endif %}
+        </td>
+    </tr>
+{% endif %}

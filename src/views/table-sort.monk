@@ -1,0 +1,23 @@
+{% for name of data %}
+    <th data-action-sort="{{ name }}" class="mdl-data-table__cell--non-numeric {{ current === 'ranking' ? 'mdl-color-text--grey-200 do-nothing' : '' }}">
+        <i class="material-icons mdl-list__item-icon">
+            {% if name === 'level' %}
+                exposure
+            {% endif %}
+            {% if name === 'name' %}
+                flash_on
+            {% endif %}
+            {% if name === 'school' %}
+                school
+            {% endif %}
+        </i>
+
+        <span>
+            &nbsp; {{ name }}
+        </span>
+
+        <i class="material-icons mdl-color-text--teal-600 mdl-list__item-icon {{ name === current ? 'mdl-color-text--teal-600' : 'mdl-color-text--grey-300' }}">
+            {{ rev ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+        </i>
+    </th>
+{% endfor %}
