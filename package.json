@@ -7,6 +7,7 @@
     "views": "views/*.monk"
   },
   "scripts": {
+    "postinstall": "cp ./node_modules/clipboard/dist/clipboard.min.js ./dist && cp ./node_modules/jquery/dist/jquery.min.js ./dist && cp ./node_modules/monkberry/monkberry.js ./dist",
     "views": "monkberry src/views/*.monk --source-map --output dist/view.js",
     "js": "babel src/app.js --out-file dist/app.js",
     "develop": "nodemon --watch src -e monk,js --exec 'npm run views && npm run js'"
