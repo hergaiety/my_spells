@@ -1,3 +1,8 @@
+<th>
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="table-header">
+        <input type="checkbox" id="table-header" class="mdl-checkbox__input" />
+    </label>
+</th>
 {% for name of data %}
     <th data-action-sort="{{ name }}" class="mdl-data-table__cell--non-numeric {{ current === 'ranking' ? 'mdl-color-text--grey-200 do-nothing' : '' }}">
         <i class="material-icons mdl-list__item-icon">

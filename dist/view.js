@@ -254,7 +254,6 @@ function search_field() {
   input0.setAttribute("class", "mdl-textfield__input");
   input0.setAttribute("data-action-search", "");
   input0.setAttribute("type", "text");
-  input0.setAttribute("name", "sample");
   input0.id = "fixed-header-drawer-exp";
 
   // Update functions
@@ -647,31 +646,44 @@ function spell_list_if0_for0() {
   // Create elements
   var tr0 = document.createElement('tr');
   var td1 = document.createElement('td');
-  var strong2 = document.createElement('strong');
-  var text3 = document.createTextNode('');
+  var label2 = document.createElement('label');
+  var input3 = document.createElement('input');
   var td4 = document.createElement('td');
-  var text5 = document.createTextNode('');
-  var td6 = document.createElement('td');
-  var text7 = document.createTextNode('');
+  var strong5 = document.createElement('strong');
+  var text6 = document.createTextNode('');
+  var td7 = document.createElement('td');
+  var text8 = document.createTextNode('');
+  var td9 = document.createElement('td');
+  var text10 = document.createTextNode('');
 
   // Construct dom
-  strong2.appendChild(text3);
-  td1.appendChild(strong2);
-  td1.setAttribute("class", "spell-name mdl-data-table__cell--non-numeric");
-  td4.appendChild(text5);
-  td4.setAttribute("class", "spell-school mdl-data-table__cell--non-numeric");
-  td6.appendChild(text7);
-  td6.setAttribute("class", "spell-level");
+  input3.setAttribute("type", "checkbox");
+  input3.setAttribute("name", "selected");
+  input3.setAttribute("class", "mdl-checkbox__input dontprop");
+  label2.appendChild(input3);
+  label2.setAttribute("class", "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select dontprop");
+  td1.appendChild(label2);
+  strong5.appendChild(text6);
+  td4.appendChild(strong5);
+  td4.setAttribute("class", "spell-name mdl-data-table__cell--non-numeric");
+  td7.appendChild(text8);
+  td7.setAttribute("class", "spell-school mdl-data-table__cell--non-numeric");
+  td9.appendChild(text10);
+  td9.setAttribute("class", "spell-level");
   tr0.appendChild(td1);
   tr0.appendChild(td4);
-  tr0.appendChild(td6);
+  tr0.appendChild(td7);
+  tr0.appendChild(td9);
 
   // Update functions
   this.__update__ = {
+    name: function (name) {
+      input3.value = name;;
+    },
     spell: function (spell) {
-      text3.textContent = spell.name;
-      text5.textContent = spell.school;
-      text7.textContent = spell.prettyLevel;
+      text6.textContent = spell.name;
+      text8.textContent = spell.school;
+      text10.textContent = spell.prettyLevel;
       tr0.setAttribute("data-action-details", spell.name);;
     }
   };
@@ -683,6 +695,9 @@ spell_list_if0_for0.prototype = Object.create(Monkberry.prototype);
 spell_list_if0_for0.prototype.constructor = spell_list_if0_for0;
 spell_list_if0_for0.pool = [];
 spell_list_if0_for0.prototype.update = function (__data__) {
+  if (__data__.name !== undefined) {
+    this.__update__.name(__data__.name);
+  }
   if (__data__.spell !== undefined && __data__.__index__ !== undefined) {
     this.__update__.spell(__data__.spell);
   }
@@ -800,8 +815,20 @@ function table_sort() {
   var _this = this;
 
   // Create elements
+  var th0 = document.createElement('th');
+  var label1 = document.createElement('label');
+  var input2 = document.createElement('input');
   var for0 = document.createComment('for');
   var children0 = new Monkberry.Map();
+
+  // Construct dom
+  input2.setAttribute("type", "checkbox");
+  input2.id = "table-header";
+  input2.setAttribute("class", "mdl-checkbox__input");
+  label1.appendChild(input2);
+  label1.setAttribute("class", "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select");
+  label1.setAttribute("for", "table-header");
+  th0.appendChild(label1);
 
   // Update functions
   this.__update__ = {
@@ -819,7 +846,7 @@ function table_sort() {
   };
 
   // Set root nodes
-  this.nodes = [for0];
+  this.nodes = [th0, for0];
 }
 table_sort.prototype = Object.create(Monkberry.prototype);
 table_sort.prototype.constructor = table_sort;

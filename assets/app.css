@@ -2,6 +2,10 @@ body {
     background: #fafafa;
 }
 
+.mdl-mini-footer {
+    padding: .5em 1em 2.75em 1em
+}
+
 .do-nothing {
     pointer-events: none;
 }
@@ -15,6 +19,15 @@ body {
     padding-bottom: 100%;
     text-align: center;
     background: url('wand.svg') no-repeat top center;
+}
+
+.mdl-layout__header .mdl-button .mdl-badge[data-badge] {
+    margin-right: 0;
+}
+
+.mdl-layout__header .mdl-button .mdl-badge[data-badge]::after {
+    left: -1em;
+    right: auto;
 }
 
 .mdl-navigation .mdl-textfield__label i {

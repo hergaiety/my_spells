@@ -217,8 +217,9 @@ const spellDetails = name => {
 /**
  * Event Bindings
  */
+$('body')
 // Listen for header sorts
-$('body').on('click', '[data-action-sort]', e => {
+.on('click', '[data-action-sort]', e => {
     let name = $(e.currentTarget).attr('data-action-sort');
     let rev = store.tableSort.current === name && !store.tableSort.rev;
     store.tableSort.current = name;
@@ -227,10 +228,9 @@ $('body').on('click', '[data-action-sort]', e => {
     localStorage.setItem('tableSortRev', rev);
     view.spell_list.update({ data: sortSpells(store.spells) });
     view.table_sort.update(store.tableSort);
-});
-
+})
 // Listen for checkbox changes to filter spells
-$('body').on('change', '[data-action-classtoggle]', e => {
+.on('change', '[data-action-classtoggle]', e => {
     let name = $(e.currentTarget).attr('data-action-classtoggle');
     let add = $(e.currentTarget).prop('checked');
     let index = store.classes.current.indexOf(name);
@@ -242,10 +242,9 @@ $('body').on('change', '[data-action-classtoggle]', e => {
     localStorage.setItem('classes', store.classes.current);
     view.spell_list.update({ data: applyFilters() });
     view.table_sort.update({ current: store.tableSort.current });
-});
-
+})
 // Listen to search to filter by
-$('body').on('change keyup cut paste', '[data-action-search]', e => {
+.on('change keyup cut paste', '[data-action-search]', e => {
     setTimeout(() => {
         // Delay for value to change
         store.search = $(e.currentTarget).val();
@@ -257,17 +256,28 @@ $('body').on('change keyup cut paste', '[data-action-search]', e => {
         view.spell_list.update({ data: applyFilters() });
         view.table_sort.update(store.tableSort);
     }, 0);
-});
-
+})
 // Listen for click on spells to open details
-$('body').on('click', '[data-action-details]', e => {
+.on('click', '[data-action-details]', e => {
     let name = $(e.currentTarget).attr('data-action-details');
     window.location.hash = name;
     spellDetails(name);
-});
-
+})
+// Stop propogation if dontprop clicked
+.on('click', '.dontprop', e => {
+    e.stopPropagation();
+})
+// Toggle All
+.on('change', 'label[for=table-header] input[type=checkbox]', e => {
+    $(e.target).closest('form').find('[name=selected]').each(function () {
+        this.checked = e.target.checked;
+        if (this.checked) $(this).closest('label').addClass('is-checked');else $(this).closest('label').removeClass('is-checked');
+    });
+}).on('change', 'input[name=selected][type=checkbox]', e => {
+    console.log($('form[data-selected]').serialize());
+})
 // Article Scroll with User
-$('.mdl-layout__content').on('scroll', debounce(() => {
+.on('scroll', '.mdl-layout__content', debounce(() => {
     let distance = $('.mdl-layout__content')[0].scrollTop;
     $('[data-template=spell-details]').css('margin-top', distance);
 }, 10));

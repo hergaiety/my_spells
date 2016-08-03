@@ -1,6 +1,11 @@
 {% if data.length %}
     {% for spell of data %}
         <tr data-action-details="{{ spell.name }}">
+            <td>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select dontprop">
+                    <input type="checkbox" name="selected" value="{{ name }}" class="mdl-checkbox__input dontprop" />
+                </label>
+            </td>
             <td class="spell-name mdl-data-table__cell--non-numeric">
                 <strong>
                     {{ spell.name }}

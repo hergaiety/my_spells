@@ -14,20 +14,12 @@
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
                     <div class="mdl-layout-spacer"></div>
-                    <nav class="mdl-navigation">
-                        <a class="mdl-navigation__link" href="https://dark12222000.github.io/lootsplit/">
-                            <i class="material-icons">local_atm</i>
-                            Loot Split
-                        </a>
-                        <a class="mdl-navigation__link" href="http://paulvmoreau.github.io/BeltFedNPCs/">
-                            <i class="material-icons">people</i>
-                            NPC Generator
-                        </a>
-                        <a class="mdl-navigation__link mdl-color-text--teal-100" href="https://github.com/sharpshark28/my_spells">
-                            <i class="material-icons">code</i>
-                            Fork Me On Github
-                        </a>
-                    </nav>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                        <span class="mdl-badge" data-badge="4">
+                            <i class="material-icons">print</i>
+                            Print
+                        </span>
+                    </button>
                     <div data-action-details="" role="button" tabindex="0"><i class="material-icons">keyboard_arrow_left</i></div>
                 </div>
             </header>
@@ -40,7 +32,7 @@
                     <form>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <div data-template="search-field"></div>
-                            <label class="mdl-textfield__label" for="sample3">
+                            <label class="mdl-textfield__label">
                                 <i class="material-icons">search</i>
                                 Search
                             </label>
@@ -53,7 +45,7 @@
             </aside>
             <main class="mdl-layout__content">
                 <div class="page-content">
-                    <div class="mdl-grid">
+                    <form class="mdl-grid" id="selected-spells" data-selected>
                         <table id="spell-list-container" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop mdl-data-table mdl-shadow--2dp">
                             <thead>
                                 <tr data-template="table-sort"></tr>
@@ -61,9 +53,35 @@
                             <tbody data-template="spell-list"></tbody>
                         </table>
                         <article data-template="spell-details" class="mdl-cell mdl-cell--12-col mdl-cell--6-col-desktop mdl-color-text--grey-600"></article>
-                    </div>
+                    </form>
                 </div>
             </main>
+
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">My Spells</div>
+                    <ul class="mdl-mini-footer__link-list">
+                        <li>
+                            <a class="mdl-navigation__link mdl-color-text--teal-100" href="https://github.com/sharpshark28/my_spells">
+                                <i class="material-icons">code</i>
+                                Fork Me On Github
+                            </a>
+                        </li>
+                        <li>
+                            <a class="mdl-navigation__link" href="https://dark12222000.github.io/lootsplit/">
+                                <i class="material-icons">local_atm</i>
+                                Loot Split
+                            </a>
+                        </li>
+                        <li>
+                            <a class="mdl-navigation__link" href="http://paulvmoreau.github.io/BeltFedNPCs/">
+                                <i class="material-icons">people</i>
+                                NPC Generator
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
 
             <div id="toast" class="mdl-js-snackbar mdl-snackbar">
                 <div class="mdl-snackbar__text"></div>

@@ -1,1 +1,1 @@
-<input value="{{ data }}" class="mdl-textfield__input" data-action-search type="text" name="sample" id="fixed-header-drawer-exp" />
+<input value="{{ data }}" class="mdl-textfield__input" data-action-search type="text" id="fixed-header-drawer-exp" />
