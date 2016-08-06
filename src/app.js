@@ -103,10 +103,10 @@ const emphasis = str => {
     let keywords = ['constitution', 'con', 'intelligence', 'int', 'wisdom', 'wis', 'strength', 'str', 'dexterity', 'dex', 'charisma', 'cha', 'comeliness', 'com', 'saving throw', 'ability check', 'skill check'];
     keywords.forEach(word => {
         let r = new RegExp(` ${word} `, 'gi');
-        str = str.replace(r, o => `<em class="mdl-color-text--teal-600">${o}</em>`);
+        str = str.replace(r, o => ` _${o.trim()}_ `);
     });
 
-    str = str.replace(/[\s()<>]+\d+d*\d*(th)*[\s()<>]+/gi, o => `<strong>${o}</strong>`);
+    str = str.replace(/[\s()<>]+\d+d*\d*(th)*[\s()<>]+/gi, o => ` **${o.trim()}** `);
     return str;
 };
 
@@ -207,8 +207,13 @@ const spellDetails = name => {
         view.spell_details.update({data: {}});
         $('body').removeClass('details');
     } else {
-        let data = store.spells.find(spell => name === spell.name);
+        let data = clone(store.spells.find(spell => name === spell.name));
+        let md = new Remarkable();
+        data.description = Array.isArray(data.description) ? data.description.join('\n') : data.description;
         data.description = emphasis(data.description);
+        data.description = md.render(data.description);
+        data.description = data.description.replace(/\n/g, '<br>');
+
         view.spell_details.update({
             data,
             url: window.location.href
