@@ -58,6 +58,12 @@ view.spell_list = Monkberry.render(spell_list, el('spell-list'));
 view.spell_list.update({});
 
 /**
+ * Render Spell Print List
+ */
+view.spell_list_print = Monkberry.render(spell_list_print, el('spell-list-print'));
+view.spell_list_print.update({});
+
+/**
  * Render Spell Details
  */
 view.spell_details = Monkberry.render(spell_details, el('spell-details'));
@@ -274,7 +280,20 @@ $('body')
         if (this.checked) $(this).closest('label').addClass('is-checked');else $(this).closest('label').removeClass('is-checked');
     });
 }).on('change', 'input[name=selected][type=checkbox]', e => {
-    console.log($('form[data-selected]').serialize());
+    let selectedSpells = $('form[data-selected]').serializeArray().map(sel => store.spells.find(spell => sel.value === spell.name)).sort((a, b) => {
+        if (a.name > b.name) return 1;
+        if (a.name < b.name) return -1;
+        return 0;
+    });
+    view.spell_list_print.update({ data: selectedSpells });
+    if (selectedSpells.length) {
+        $('[data-action=print] [data-badge]').attr('data-badge', selectedSpells.length);
+        $('[data-action=print]').slideDown('fast');
+    } else {
+        $('[data-action=print]').slideUp('fast');
+    }
+}).on('click', '[data-action=print]', e => {
+    window.print();
 })
 // Article Scroll with User
 .on('scroll', '.mdl-layout__content', debounce(() => {

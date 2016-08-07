@@ -1,0 +1,14 @@
+@media print {
+    body {
+        background: white;
+    }
+
+    body > .printonly {
+        display: block;
+    }
+
+    body > :not(.printonly) {
+        display: none;
+    }
+
+}

@@ -556,6 +556,97 @@ window.spell_details = spell_details;
 /**
  * @class
  */
+function spell_list_print() {
+  Monkberry.call(this);
+  var _this = this;
+
+  // Create elements
+  var for0 = document.createComment('for');
+  var children0 = new Monkberry.Map();
+
+  // Update functions
+  this.__update__ = {
+    data: function (data) {
+      Monkberry.loop(_this, for0, children0, spell_list_print_for0, data, {"value":"spell"});
+    }
+  };
+
+  // On update actions
+  this.onUpdate = function (__data__) {
+    children0.forEach(function (view) {
+      view.update(__data__);
+      view.update(view.__state__);
+    });
+  };
+
+  // Set root nodes
+  this.nodes = [document.createTextNode("Test Test "), for0];
+}
+spell_list_print.prototype = Object.create(Monkberry.prototype);
+spell_list_print.prototype.constructor = spell_list_print;
+spell_list_print.pool = [];
+spell_list_print.prototype.update = function (__data__) {
+  if (__data__.data !== undefined) {
+    this.__update__.data(__data__.data);
+  }
+  this.onUpdate(__data__);
+};
+
+/**
+ * @class
+ */
+function spell_list_print_for0() {
+  Monkberry.call(this);
+  this.__state__ = {};
+
+  // Create elements
+  var tr0 = document.createElement('tr');
+  var td1 = document.createElement('td');
+  var strong2 = document.createElement('strong');
+  var text3 = document.createTextNode('');
+  var td4 = document.createElement('td');
+  var text5 = document.createTextNode('');
+  var td6 = document.createElement('td');
+  var text7 = document.createTextNode('');
+
+  // Construct dom
+  strong2.appendChild(text3);
+  td1.appendChild(strong2);
+  td1.setAttribute("class", "spell-name mdl-data-table__cell--non-numeric");
+  td4.appendChild(text5);
+  td4.setAttribute("class", "spell-school mdl-data-table__cell--non-numeric");
+  td6.appendChild(text7);
+  td6.setAttribute("class", "spell-level");
+  tr0.appendChild(td1);
+  tr0.appendChild(td4);
+  tr0.appendChild(td6);
+
+  // Update functions
+  this.__update__ = {
+    spell: function (spell) {
+      text3.textContent = spell.name;
+      text5.textContent = spell.school;
+      text7.textContent = spell.prettyLevel;
+    }
+  };
+
+  // Set root nodes
+  this.nodes = [tr0];
+}
+spell_list_print_for0.prototype = Object.create(Monkberry.prototype);
+spell_list_print_for0.prototype.constructor = spell_list_print_for0;
+spell_list_print_for0.pool = [];
+spell_list_print_for0.prototype.update = function (__data__) {
+  if (__data__.spell !== undefined && __data__.__index__ !== undefined) {
+    this.__update__.spell(__data__.spell);
+  }
+};
+
+window.spell_list_print = spell_list_print;
+
+/**
+ * @class
+ */
 function spell_list() {
   Monkberry.call(this);
   var _this = this;
@@ -677,10 +768,8 @@ function spell_list_if0_for0() {
 
   // Update functions
   this.__update__ = {
-    name: function (name) {
-      input3.value = name;;
-    },
     spell: function (spell) {
+      input3.value = spell.name;;
       text6.textContent = spell.name;
       text8.textContent = spell.school;
       text10.textContent = spell.prettyLevel;
@@ -695,9 +784,6 @@ spell_list_if0_for0.prototype = Object.create(Monkberry.prototype);
 spell_list_if0_for0.prototype.constructor = spell_list_if0_for0;
 spell_list_if0_for0.pool = [];
 spell_list_if0_for0.prototype.update = function (__data__) {
-  if (__data__.name !== undefined) {
-    this.__update__.name(__data__.name);
-  }
   if (__data__.spell !== undefined && __data__.__index__ !== undefined) {
     this.__update__.spell(__data__.spell);
   }

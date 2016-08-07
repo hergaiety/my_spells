@@ -8,14 +8,15 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.teal-pink.min.css" />
         <link rel="stylesheet" href="./assets/app.css" />
+        <link rel="stylesheet" href="./assets/print.css" />
     </head>
     <body>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
             <header class="mdl-layout__header">
                 <div class="mdl-layout__header-row">
                     <div class="mdl-layout-spacer"></div>
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-                        <span class="mdl-badge" data-badge="4">
+                    <button data-action="print" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                        <span class="mdl-badge" data-badge="0">
                             <i class="material-icons">print</i>
                             Print
                         </span>
@@ -88,6 +89,18 @@
                 <button class="mdl-snackbar__action" type="button"></button>
             </div>
         </div>
+
+        <table class="printonly">
+            <thead>
+                <tr>
+                    <td>
+                        test1
+                    </td>
+                </tr>
+            </thead>
+            <tbody data-template="spell-list-print">
+            </tbody>
+        </table>
 
         <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
         <script src="./dist/jquery.min.js"></script>

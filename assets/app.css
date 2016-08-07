@@ -2,8 +2,13 @@ body {
     background: #fafafa;
 }
 
+[data-action=print],
+.printonly {
+    display: none;
+}
+
 .mdl-mini-footer {
-    padding: .5em 1em 2.75em 1em
+    padding: .5em 1em .75em 1em
 }
 
 .do-nothing {
