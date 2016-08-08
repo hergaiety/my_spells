@@ -233,6 +233,7 @@ const spellDetails = name => {
             data,
             url: window.location.href
         });
+        componentHandler.upgradeDom();
         $('body').addClass('details');
         let clipboard = new Clipboard('.copy-to-clipboard');
         clipboard
@@ -289,6 +290,7 @@ $('body')
     localStorage.setItem('tableSortRev', rev);
     view.spell_list.update({data: sortSpells(store.spells)});
     view.table_sort.update(store.tableSort);
+    componentHandler.upgradeDom();
 })
 // Listen for checkbox changes to filter spells
 .on('change', '[data-action-classtoggle]', e => {
@@ -303,6 +305,7 @@ $('body')
     localStorage.setItem('classes', store.classes.current);
     view.spell_list.update({data: applyFilters()});
     view.table_sort.update({current: store.tableSort.current});
+    componentHandler.upgradeDom();
 })
 // Listen to search to filter by
 .on('change keyup cut paste', '[data-action-search]', e => {
@@ -315,6 +318,7 @@ $('body')
         localStorage.setItem('tableSortRev', store.tableSort.rev);
         view.spell_list.update({data: applyFilters()});
         view.table_sort.update(store.tableSort);
+        componentHandler.upgradeDom();
     }, 0);
 })
 // Listen for click on spells to open details
@@ -357,6 +361,7 @@ fetch('./spells.json')
         store.classes.data = discoverClasses(spells);
         view.spell_list.update({data: applyFilters()});
         view.class_list.update(store.classes);
+        componentHandler.upgradeDom();
         if (window.location.hash) spellDetails(window.location.hash.substr(1));
     })
     .catch(reason => console.error('Unable to retrieve spells list:', reason));
