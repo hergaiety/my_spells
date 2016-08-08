@@ -848,6 +848,7 @@ function spell_list_if0_for0() {
   label2.appendChild(input3);
   label2.setAttribute("class", "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select dontprop");
   td1.appendChild(label2);
+  td1.setAttribute("class", "hide-phone");
   strong5.appendChild(text6);
   td4.appendChild(strong5);
   td4.setAttribute("class", "spell-name mdl-data-table__cell--non-numeric");
@@ -1009,6 +1010,7 @@ function table_sort() {
   label1.setAttribute("class", "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select");
   label1.setAttribute("for", "table-header");
   th0.appendChild(label1);
+  th0.setAttribute("class", "hide-phone");
 
   // Update functions
   this.__update__ = {

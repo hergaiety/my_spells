@@ -8,6 +8,11 @@ body {
 }
 
 .mdl-mini-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
     padding: .5em 1em .75em 1em
 }
 
@@ -111,6 +116,10 @@ ol {
 }
 
 @media (max-width: 840px) {
+    .hide-phone {
+        display: none;
+    }
+
     [data-template=spell-details] {
         margin-top: 0 !important;
     }

@@ -1,4 +1,4 @@
-<th>
+<th class="hide-phone">
     <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="table-header">
         <input type="checkbox" id="table-header" class="mdl-checkbox__input" />
     </label>
