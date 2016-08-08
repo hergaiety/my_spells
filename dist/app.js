@@ -330,9 +330,9 @@ $('body')
     renderPrint();
 }).on('change', 'input[name=selected][type=checkbox]', renderPrint).on('click', '[data-action=print]', e => {
     window.print();
-})
+});
 // Article Scroll with User
-.on('scroll', '.mdl-layout__content', debounce(() => {
+$('.mdl-layout__content').on('scroll', debounce(() => {
     let distance = $('.mdl-layout__content')[0].scrollTop;
     $('[data-template=spell-details]').css('margin-top', distance);
 }, 10));
