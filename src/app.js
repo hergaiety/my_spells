@@ -290,6 +290,7 @@ $('body')
         if(this.checked) $(this).closest('label').addClass('is-checked');
         else $(this).closest('label').removeClass('is-checked');
     });
+    $('[name=selected]').trigger('change');
 })
 .on('change', 'input[name=selected][type=checkbox]', e => {
     let selectedSpells = $('form[data-selected]')

@@ -279,6 +279,7 @@ $('body')
         this.checked = e.target.checked;
         if (this.checked) $(this).closest('label').addClass('is-checked');else $(this).closest('label').removeClass('is-checked');
     });
+    $('[name=selected]').trigger('change');
 }).on('change', 'input[name=selected][type=checkbox]', e => {
     let selectedSpells = $('form[data-selected]').serializeArray().map(sel => store.spells.find(spell => sel.value === spell.name)).sort((a, b) => {
         if (a.name > b.name) return 1;

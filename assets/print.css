@@ -1,6 +1,9 @@
 @media print {
     body {
         background: white;
+        font-size: 11pt;
+        box-sizing: border-box;
+        padding: 1em;
     }
 
     body > .printonly {
@@ -11,4 +14,17 @@
         display: none;
     }
 
+    th {
+        white-space: nowrap;
+        padding: 1em 1em 1em 0;
+        text-align: left;
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    .spell-description {
+        font-size: 8pt;
+    }
 }

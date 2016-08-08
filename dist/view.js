@@ -580,7 +580,7 @@ function spell_list_print() {
   };
 
   // Set root nodes
-  this.nodes = [document.createTextNode("Test Test "), for0];
+  this.nodes = [for0];
 }
 spell_list_print.prototype = Object.create(Monkberry.prototype);
 spell_list_print.prototype.constructor = spell_list_print;
@@ -607,16 +607,18 @@ function spell_list_print_for0() {
   var td4 = document.createElement('td');
   var text5 = document.createTextNode('');
   var td6 = document.createElement('td');
-  var text7 = document.createTextNode('');
+  var p7 = document.createElement('p');
+  var text8 = document.createTextNode('');
 
   // Construct dom
   strong2.appendChild(text3);
   td1.appendChild(strong2);
-  td1.setAttribute("class", "spell-name mdl-data-table__cell--non-numeric");
+  td1.setAttribute("class", "spell-name");
   td4.appendChild(text5);
-  td4.setAttribute("class", "spell-school mdl-data-table__cell--non-numeric");
-  td6.appendChild(text7);
-  td6.setAttribute("class", "spell-level");
+  td4.setAttribute("class", "spell-level");
+  p7.appendChild(text8);
+  td6.appendChild(p7);
+  td6.setAttribute("class", "spell-description");
   tr0.appendChild(td1);
   tr0.appendChild(td4);
   tr0.appendChild(td6);
@@ -625,8 +627,8 @@ function spell_list_print_for0() {
   this.__update__ = {
     spell: function (spell) {
       text3.textContent = spell.name;
-      text5.textContent = spell.school;
-      text7.textContent = spell.prettyLevel;
+      text5.textContent = spell.level;
+      text8.textContent = spell.description;
     }
   };
 

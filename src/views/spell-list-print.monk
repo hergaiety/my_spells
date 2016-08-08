@@ -1,16 +1,17 @@
-Test Test
 {% for spell of data %}
     <tr>
-        <td class="spell-name mdl-data-table__cell--non-numeric">
+        <td class="spell-name">
             <strong>
                 {{ spell.name }}
             </strong>
         </td>
-        <td class="spell-school mdl-data-table__cell--non-numeric">
-            {{ spell.school }}
-        </td>
         <td class="spell-level">
-            {{ spell.prettyLevel }}
+            {{ spell.level }}
+        </td>
+        <td class="spell-description">
+            <p>
+                {{ spell.description }}
+            </p>
         </td>
     </tr>
 {% endfor %}
