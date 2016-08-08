@@ -553,6 +553,8 @@ spell_details_else1.prototype.update = function (__data__) {
 
 window.spell_details = spell_details;
 
+var __unsafe = function unsafe(root, nodes, html) {var node,j,i = nodes.length,element = document.createElement('div');element.innerHTML = html;while (i-- > 0) {nodes[i].parentNode.removeChild(nodes.pop());}for (i = j = element.childNodes.length - 1; j >= 0; j--) {nodes.push(element.childNodes[j]);}++i;if (root.nodeType == 8) {if (root.parentNode) while (i-- > 0) {root.parentNode.insertBefore(nodes[i], root);} else throw "Can not insert child view into parent node. You need append your view first and then update.";} else while (i-- > 0) {root.appendChild(nodes[i]);}};
+
 /**
  * @class
  */
@@ -598,6 +600,7 @@ spell_list_print.prototype.update = function (__data__) {
 function spell_list_print_for0() {
   Monkberry.call(this);
   this.__state__ = {};
+  var _this = this;
 
   // Create elements
   var tr0 = document.createElement('tr');
@@ -607,8 +610,16 @@ function spell_list_print_for0() {
   var td4 = document.createElement('td');
   var text5 = document.createTextNode('');
   var td6 = document.createElement('td');
-  var p7 = document.createElement('p');
+  var strong7 = document.createElement('strong');
   var text8 = document.createTextNode('');
+  var strong9 = document.createElement('strong');
+  var text10 = document.createTextNode('');
+  var strong11 = document.createElement('strong');
+  var text12 = document.createTextNode('');
+  var for0 = document.createComment('if');
+  var child0 = {};
+  var unsafe0 = document.createComment('unsafe');
+  var unsafeNodes0 = [];
 
   // Construct dom
   strong2.appendChild(text3);
@@ -616,8 +627,17 @@ function spell_list_print_for0() {
   td1.setAttribute("class", "spell-name");
   td4.appendChild(text5);
   td4.setAttribute("class", "spell-level");
-  p7.appendChild(text8);
-  td6.appendChild(p7);
+  strong7.appendChild(document.createTextNode(" Range: "));
+  strong9.appendChild(document.createTextNode(" Casting Time: "));
+  strong11.appendChild(document.createTextNode(" Duration: "));
+  td6.appendChild(strong7);
+  td6.appendChild(text8);
+  td6.appendChild(strong9);
+  td6.appendChild(text10);
+  td6.appendChild(strong11);
+  td6.appendChild(text12);
+  td6.appendChild(for0);
+  td6.appendChild(unsafe0);
   td6.setAttribute("class", "spell-description");
   tr0.appendChild(td1);
   tr0.appendChild(td4);
@@ -628,7 +648,18 @@ function spell_list_print_for0() {
     spell: function (spell) {
       text3.textContent = spell.name;
       text5.textContent = spell.level;
-      text8.textContent = spell.description;
+      text8.textContent = spell.range;
+      text10.textContent = spell.casting_time;
+      text12.textContent = spell.duration;
+      Monkberry.cond(_this, for0, child0, spell_list_print_for0_if0, spell.ritual);
+      __unsafe(unsafe0, unsafeNodes0, spell.description);
+    }
+  };
+
+  // On update actions
+  this.onUpdate = function (__data__) {
+    if (child0.ref) {
+      child0.ref.update(__data__);
     }
   };
 
@@ -642,6 +673,28 @@ spell_list_print_for0.prototype.update = function (__data__) {
   if (__data__.spell !== undefined && __data__.__index__ !== undefined) {
     this.__update__.spell(__data__.spell);
   }
+  this.onUpdate(__data__);
+};
+
+/**
+ * @class
+ */
+function spell_list_print_for0_if0() {
+  Monkberry.call(this);
+
+  // Create elements
+  var strong0 = document.createElement('strong');
+
+  // Construct dom
+  strong0.appendChild(document.createTextNode(" Ritual"));
+
+  // Set root nodes
+  this.nodes = [strong0];
+}
+spell_list_print_for0_if0.prototype = Object.create(Monkberry.prototype);
+spell_list_print_for0_if0.prototype.constructor = spell_list_print_for0_if0;
+spell_list_print_for0_if0.pool = [];
+spell_list_print_for0_if0.prototype.update = function (__data__) {
 };
 
 window.spell_list_print = spell_list_print;

@@ -117,6 +117,19 @@ const emphasis = str => {
 };
 
 /**
+ * Description Prettifier
+ */
+const descriptionPrettifier = description => {
+    let md = new Remarkable();
+    description = Array.isArray(description) ? description.join('\n') : description;
+    description = emphasis(description);
+    description = md.render(description);
+    description = description.replace(/\n/g, '<br>');
+
+    return description;
+};
+
+/**
  * Init Spells
  */
 const initSpells = s => s.map((spell, i) => {
@@ -214,11 +227,7 @@ const spellDetails = name => {
         $('body').removeClass('details');
     } else {
         let data = clone(store.spells.find(spell => name === spell.name));
-        let md = new Remarkable();
-        data.description = Array.isArray(data.description) ? data.description.join('\n') : data.description;
-        data.description = emphasis(data.description);
-        data.description = md.render(data.description);
-        data.description = data.description.replace(/\n/g, '<br>');
+        data.description = descriptionPrettifier(data.description);
 
         view.spell_details.update({
             data,
@@ -294,12 +303,21 @@ $('body')
 })
 .on('change', 'input[name=selected][type=checkbox]', e => {
     let selectedSpells = $('form[data-selected]')
+        // Get array of items in form
         .serializeArray()
+        // Find spells based on array from form
         .map(sel => store.spells.find(spell => sel.value === spell.name))
+        // Sort alphabetically
         .sort((a, b) => {
             if (a.name > b.name) return 1;
             if (a.name < b.name) return -1;
             return 0
+        })
+        // Prettify Descriptions
+        .map(spell => {
+            spell = clone(spell);
+            spell.description = descriptionPrettifier(spell.description);
+            return spell;
         });
     view.spell_list_print.update({data: selectedSpells});
     if (selectedSpells.length) {

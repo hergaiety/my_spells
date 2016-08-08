@@ -24,7 +24,14 @@
         vertical-align: top;
     }
 
-    .spell-description {
+    .spell-description p {
         font-size: 8pt;
+        line-height: 10pt;
+        margin: .75em 0;
+        color: gray;
+    }
+
+    .spell-description br {
+        display: none;
     }
 }
