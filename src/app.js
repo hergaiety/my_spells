@@ -105,7 +105,7 @@ const discoverClasses = spells => {
  * Emphasis on important string bits
  * @param {string} string
  */
-const emphasis = str => {
+const emphasis = (str = '') => {
     let keywords = ['constitution', 'con', 'intelligence', 'int', 'wisdom', 'wis', 'strength', 'str', 'dexterity', 'dex', 'charisma', 'cha', 'comeliness', 'com', 'saving throw', 'ability check', 'skill check'];
     keywords.forEach(word => {
         let r = new RegExp(` ${word} `, 'gi');
@@ -240,6 +240,41 @@ const spellDetails = name => {
             .on('error', e => $('#toast')[0].MaterialSnackbar.showSnackbar({message: 'Sorry! Unable to copy link'}));
     }
 }
+
+/**
+ * Render Print Page
+ */
+const renderPrint = () => {
+    let selectedSpells = $('form[data-selected]')
+        // Get array of items in form
+        .serializeArray()
+        // Find spells based on array from form
+        .map(sel => store.spells.find(spell => sel.value === spell.name))
+        // Sort by level then alphabetically
+        .sort((a, b) => {
+            let aName = a.name.toLowerCase();
+            let bName = b.name.toLowerCase();
+            if (a.level > b.level) return 1;
+            if (a.level < b.level) return -1;
+            if (aName > bName) return 1;
+            if (aName < bName) return -1;
+            return 0;
+        })
+        // Prettify Descriptions
+        .map(spell => {
+            spell = clone(spell);
+            spell.description = descriptionPrettifier(spell.description);
+            return spell;
+        });
+    view.spell_list_print.update({data: selectedSpells});
+    if (selectedSpells.length) {
+        $('[data-action=print] [data-badge]').attr('data-badge', selectedSpells.length);
+        $('[data-action=print]').slideDown('fast');
+    } else {
+        $('[data-action=print]').slideUp('fast');
+    }
+};
+
 /**
  * Event Bindings
  */
@@ -299,34 +334,9 @@ $('body')
         if(this.checked) $(this).closest('label').addClass('is-checked');
         else $(this).closest('label').removeClass('is-checked');
     });
-    $('[name=selected]').trigger('change');
+    renderPrint();
 })
-.on('change', 'input[name=selected][type=checkbox]', e => {
-    let selectedSpells = $('form[data-selected]')
-        // Get array of items in form
-        .serializeArray()
-        // Find spells based on array from form
-        .map(sel => store.spells.find(spell => sel.value === spell.name))
-        // Sort alphabetically
-        .sort((a, b) => {
-            if (a.name > b.name) return 1;
-            if (a.name < b.name) return -1;
-            return 0
-        })
-        // Prettify Descriptions
-        .map(spell => {
-            spell = clone(spell);
-            spell.description = descriptionPrettifier(spell.description);
-            return spell;
-        });
-    view.spell_list_print.update({data: selectedSpells});
-    if (selectedSpells.length) {
-        $('[data-action=print] [data-badge]').attr('data-badge', selectedSpells.length);
-        $('[data-action=print]').slideDown('fast');
-    } else {
-        $('[data-action=print]').slideUp('fast');
-    }
-})
+.on('change', 'input[name=selected][type=checkbox]', renderPrint)
 .on('click', '[data-action=print]', e => {
     window.print();
 })

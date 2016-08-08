@@ -618,6 +618,8 @@ function spell_list_print_for0() {
   var text12 = document.createTextNode('');
   var for0 = document.createComment('if');
   var child0 = {};
+  var for1 = document.createComment('if');
+  var child2 = {};
   var unsafe0 = document.createComment('unsafe');
   var unsafeNodes0 = [];
 
@@ -637,6 +639,7 @@ function spell_list_print_for0() {
   td6.appendChild(strong11);
   td6.appendChild(text12);
   td6.appendChild(for0);
+  td6.appendChild(for1);
   td6.appendChild(unsafe0);
   td6.setAttribute("class", "spell-description");
   tr0.appendChild(td1);
@@ -651,7 +654,8 @@ function spell_list_print_for0() {
       text8.textContent = spell.range;
       text10.textContent = spell.casting_time;
       text12.textContent = spell.duration;
-      Monkberry.cond(_this, for0, child0, spell_list_print_for0_if0, spell.ritual);
+      Monkberry.cond(_this, for0, child0, spell_list_print_for0_if0, (spell.components) && (spell.components.raw));
+      Monkberry.cond(_this, for1, child2, spell_list_print_for0_if2, spell.ritual);
       __unsafe(unsafe0, unsafeNodes0, spell.description);
     }
   };
@@ -660,6 +664,9 @@ function spell_list_print_for0() {
   this.onUpdate = function (__data__) {
     if (child0.ref) {
       child0.ref.update(__data__);
+    }
+    if (child2.ref) {
+      child2.ref.update(__data__);
     }
   };
 
@@ -684,6 +691,38 @@ function spell_list_print_for0_if0() {
 
   // Create elements
   var strong0 = document.createElement('strong');
+  var text1 = document.createTextNode('');
+
+  // Construct dom
+  strong0.appendChild(document.createTextNode(" Components: "));
+
+  // Update functions
+  this.__update__ = {
+    spell: function (spell) {
+      text1.textContent = spell.components.raw;
+    }
+  };
+
+  // Set root nodes
+  this.nodes = [strong0, text1];
+}
+spell_list_print_for0_if0.prototype = Object.create(Monkberry.prototype);
+spell_list_print_for0_if0.prototype.constructor = spell_list_print_for0_if0;
+spell_list_print_for0_if0.pool = [];
+spell_list_print_for0_if0.prototype.update = function (__data__) {
+  if (__data__.spell !== undefined) {
+    this.__update__.spell(__data__.spell);
+  }
+};
+
+/**
+ * @class
+ */
+function spell_list_print_for0_if2() {
+  Monkberry.call(this);
+
+  // Create elements
+  var strong0 = document.createElement('strong');
 
   // Construct dom
   strong0.appendChild(document.createTextNode(" Ritual"));
@@ -691,10 +730,10 @@ function spell_list_print_for0_if0() {
   // Set root nodes
   this.nodes = [strong0];
 }
-spell_list_print_for0_if0.prototype = Object.create(Monkberry.prototype);
-spell_list_print_for0_if0.prototype.constructor = spell_list_print_for0_if0;
-spell_list_print_for0_if0.pool = [];
-spell_list_print_for0_if0.prototype.update = function (__data__) {
+spell_list_print_for0_if2.prototype = Object.create(Monkberry.prototype);
+spell_list_print_for0_if2.prototype.constructor = spell_list_print_for0_if2;
+spell_list_print_for0_if2.pool = [];
+spell_list_print_for0_if2.prototype.update = function (__data__) {
 };
 
 window.spell_list_print = spell_list_print;

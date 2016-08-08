@@ -12,6 +12,9 @@
             <strong> Range: </strong>{{ spell.range }}
             <strong> Casting Time: </strong>{{ spell.casting_time }}
             <strong> Duration: </strong>{{ spell.duration }}
+            {% if spell.components && spell.components.raw %}
+                <strong> Components: </strong>{{ spell.components.raw }}
+            {% endif %}
             {% if spell.ritual %}
                 <strong> Ritual</strong> 
             {% endif %}
