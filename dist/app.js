@@ -19,6 +19,7 @@ const debounce = (func, wait, immediate) => {
 };
 const el = id => $(`[data-template=${ id }]`)[0] || console.error('Unable to render to', id);
 const clone = obj => JSON.parse(JSON.stringify(obj));
+const basicDetails = ['level', 'range', 'duration', 'casting_time', 'saving_throw', 'aoe', 'source'];
 
 /**
  * Global store and view holders
@@ -163,7 +164,6 @@ const initSpells = s => s.map((spell, i) => {
     spell.selected = false;
     spell.ranking = 0;
     spell.level = parseInt(spell.level) ? spell.level : 0;
-    spell.prettyLevel = spell.level === 0 ? 'C' : spell.level;
     return spell;
 });
 
@@ -247,6 +247,17 @@ const spellDetails = name => {
     } else {
         let data = clone(store.spells.find(spell => name === spell.name));
         data.description = descriptionPrettifier(data.description);
+        data.details = basicDetails.map(detail => {
+            if (data[detail]) {
+                return {
+                    label: detail.replace('_', ' '),
+                    value: data[detail]
+                };
+            }
+        });
+        if (data.components && data.components.raw) {
+            data.details.push({ label: 'components', value: data.components.raw });
+        }
 
         view.spell_details.update({
             data,
@@ -282,6 +293,17 @@ const renderPrint = () => {
     .map(spell => {
         spell = clone(spell);
         spell.description = descriptionPrettifier(spell.description);
+        spell.details = basicDetails.map(detail => {
+            if (spell[detail]) {
+                return {
+                    label: detail.replace('_', ' '),
+                    value: spell[detail]
+                };
+            }
+        });
+        if (spell.components && spell.components.raw) {
+            spell.details.push({ label: 'components', value: spell.components.raw });
+        }
         return spell;
     });
     view.spell_list_print.update({ data: selectedSpells });

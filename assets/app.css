@@ -89,9 +89,32 @@ ol {
     padding: 0 2rem;
 }
 
-[data-template=spell-details] .description {
+#description {
+    margin: 0;
     max-height: 13em;
     overflow: auto;
+}
+
+#description br:last-of-type {
+    display: none;
+}
+
+#description p:last-of-type {
+    margin-bottom: 0;
+}
+
+#copy {
+    width: 100%;
+}
+
+#details {
+    columns: 2;
+    padding: 0;
+    list-style-type: none;
+}
+
+#details strong {
+    text-transform: capitalize;
 }
 
 .mdl-layout__header [data-action-details=""] {

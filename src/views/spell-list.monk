@@ -1,23 +1,25 @@
 {% if data.length %}
     {% for spell of data %}
-        <tr data-action-details="{{ spell.name }}">
-            <td class="hide-phone">
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select dontprop">
-                    <input type="checkbox" name="selected" value="{{ spell.name }}" class="mdl-checkbox__input dontprop" />
-                </label>
-            </td>
-            <td class="spell-name mdl-data-table__cell--non-numeric">
-                <strong>
-                    {{ spell.name }}
-                </strong>
-            </td>
-            <td class="spell-school mdl-data-table__cell--non-numeric">
-                {{ spell.school }}
-            </td>
-            <td class="spell-level">
-                {{ spell.prettyLevel }}
-            </td>
-        </tr>
+        {% if spell.name %}
+            <tr data-action-details="{{ spell.name }}">
+                <td class="hide-phone">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select dontprop">
+                        <input type="checkbox" name="selected" value="{{ spell.name }}" class="mdl-checkbox__input dontprop" />
+                    </label>
+                </td>
+                <td class="spell-name mdl-data-table__cell--non-numeric">
+                    <strong>
+                        {{ spell.name }}
+                    </strong>
+                </td>
+                <td class="spell-school mdl-data-table__cell--non-numeric">
+                    {{ spell.school }}
+                </td>
+                <td class="spell-level">
+                    {{ spell.level }}
+                </td>
+            </tr>
+        {% endif %}
     {% endfor %}
 {% else %}
     <tr class="do-nothing">
