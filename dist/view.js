@@ -991,6 +991,145 @@ window.spell_list = spell_list;
 /**
  * @class
  */
+function system_list() {
+  Monkberry.call(this);
+  var _this = this;
+
+  // Create elements
+  var for0 = document.createComment('if');
+  var child0 = {};
+
+  // Update functions
+  this.__update__ = {
+    data: function (data) {
+      Monkberry.cond(_this, for0, child0, system_list_if0, data);
+    }
+  };
+
+  // On update actions
+  this.onUpdate = function (__data__) {
+    if (child0.ref) {
+      child0.ref.update(__data__);
+    }
+  };
+
+  // Set root nodes
+  this.nodes = [for0];
+}
+system_list.prototype = Object.create(Monkberry.prototype);
+system_list.prototype.constructor = system_list;
+system_list.pool = [];
+system_list.prototype.update = function (__data__) {
+  if (__data__.data !== undefined) {
+    this.__update__.data(__data__.data);
+  }
+  this.onUpdate(__data__);
+};
+
+/**
+ * @class
+ */
+function system_list_if0() {
+  Monkberry.call(this);
+  var _this = this;
+
+  // Create elements
+  var div0 = document.createElement('div');
+  var input1 = document.createElement('input');
+  var label2 = document.createElement('label');
+  var ul3 = document.createElement('ul');
+  var children0 = new Monkberry.Map();
+
+  // Construct dom
+  input1.setAttribute("class", "mdl-textfield__input");
+  input1.setAttribute("data-action", "system");
+  input1.setAttribute("type", "text");
+  input1.id = "system";
+  input1.setAttribute("readonly", "");
+  input1.setAttribute("tabIndex", "-1");
+  label2.appendChild(document.createTextNode("System"));
+  label2.setAttribute("class", "mdl-textfield__label mdl-color-text--white");
+  label2.setAttribute("for", "system");
+  ul3.setAttribute("class", "mdl-menu mdl-menu--bottom-left mdl-js-menu");
+  ul3.setAttribute("for", "system");
+  div0.appendChild(input1);
+  div0.appendChild(label2);
+  div0.appendChild(ul3);
+  div0.setAttribute("class", "mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select");
+
+  // Update functions
+  this.__update__ = {
+    current: function (current) {
+      input1.value = current;;
+    },
+    data: function (data) {
+      Monkberry.loop(_this, ul3, children0, system_list_if0_for0, data, {"value":"system"});
+    }
+  };
+
+  // On update actions
+  this.onUpdate = function (__data__) {
+    children0.forEach(function (view) {
+      view.update(__data__);
+      view.update(view.__state__);
+    });
+  };
+
+  // Set root nodes
+  this.nodes = [div0];
+}
+system_list_if0.prototype = Object.create(Monkberry.prototype);
+system_list_if0.prototype.constructor = system_list_if0;
+system_list_if0.pool = [];
+system_list_if0.prototype.update = function (__data__) {
+  if (__data__.current !== undefined) {
+    this.__update__.current(__data__.current);
+  }
+  if (__data__.data !== undefined) {
+    this.__update__.data(__data__.data);
+  }
+  this.onUpdate(__data__);
+};
+
+/**
+ * @class
+ */
+function system_list_if0_for0() {
+  Monkberry.call(this);
+  this.__state__ = {};
+
+  // Create elements
+  var li0 = document.createElement('li');
+  var text1 = document.createTextNode('');
+
+  // Construct dom
+  li0.appendChild(text1);
+  li0.setAttribute("class", "mdl-menu__item");
+
+  // Update functions
+  this.__update__ = {
+    system: function (system) {
+      text1.textContent = system.friendly;
+    }
+  };
+
+  // Set root nodes
+  this.nodes = [li0];
+}
+system_list_if0_for0.prototype = Object.create(Monkberry.prototype);
+system_list_if0_for0.prototype.constructor = system_list_if0_for0;
+system_list_if0_for0.pool = [];
+system_list_if0_for0.prototype.update = function (__data__) {
+  if (__data__.system !== undefined && __data__.__index__ !== undefined) {
+    this.__update__.system(__data__.system);
+  }
+};
+
+window.system_list = system_list;
+
+/**
+ * @class
+ */
 function table_sort() {
   Monkberry.call(this);
   var _this = this;

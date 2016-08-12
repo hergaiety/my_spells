@@ -24,8 +24,23 @@ const clone = obj => JSON.parse(JSON.stringify(obj));
 /**
  * Global store and view holders
  */
-let store = {};
 let view = {};
+let store = {
+    systems: {
+        data: [{
+            friendly: 'Dungeons & Dragons 5e',
+            value: 'dnd5e'
+        }, {
+            friendly: 'HackMaster 4e (WIP)',
+            value: 'hackmaster4e'
+        }]
+    }
+};
+
+/**
+ * See Matching System Friendly and Value
+ */
+const matchingSystemProp = (system, requested) => store.systems.data.find(d => d[requested === 'value' ? 'friendly' : 'value'] === system)[requested];
 
 /**
  * Init Local Storage
@@ -36,10 +51,16 @@ const localStorageDefault = (key, val) => {
 let defaults = {
     tableSortName: 'name',
     tableSortRev: false,
+    system: 'dnd5e',
     classes: [],
     search: ''
 };
 for (let cur in defaults) localStorageDefault(cur, defaults[cur]);
+
+if (window.location.hash) {
+    let urlSystem = window.location.hash.substr(1).split('/')[0];
+    localStorage.setItem('system', store.systems.data.find(d => d.value === urlSystem).value);
+}
 
 /**
  * Render Table Sort
@@ -53,10 +74,17 @@ view.table_sort = Monkberry.render(table_sort, el('table-sort'));
 view.table_sort.update(store.tableSort);
 
 /**
+ * Render Systems
+ */
+store.systems.current = matchingSystemProp(localStorage.getItem('system'), 'friendly');
+view.systems_list = Monkberry.render(system_list, el('system-list'));
+view.systems_list.update(store.systems);
+
+/**
  * Render Spell List
  */
 view.spell_list = Monkberry.render(spell_list, el('spell-list'));
-view.spell_list.update({});
+view.spell_list.update({data: false});
 
 /**
  * Render Spell Print List
@@ -78,7 +106,7 @@ store.classes = {
     current: localStorage.getItem('classes') ? localStorage.getItem('classes').split(',') : []
 };
 view.class_list = Monkberry.render(class_list, el('class-list'));
-view.class_list.update(store.classes);
+view.class_list.update({data: false});
 
 /**
  * Render Search
@@ -324,7 +352,11 @@ $('body')
 // Listen for click on spells to open details
 .on('click', '[data-action-details]', e => {
     let name = $(e.currentTarget).attr('data-action-details');
-    window.location.hash = name;
+    if (name) {
+        window.location.hash = matchingSystemProp(store.systems.current, 'value') + '/' + name;
+    } else {
+        window.location.hash = '';
+    }
     spellDetails(name);
 })
 // Stop propogation if dontprop clicked
@@ -349,11 +381,23 @@ $('.mdl-layout__content').on('scroll', debounce(() => {
     let distance = $('.mdl-layout__content')[0].scrollTop;
     $('[data-template=spell-details]').css('margin-top', distance);
 }, 10));
+// System changed
+$('[data-action=system]').on('change', e => {
+    let system = $(e.currentTarget).val();
+    let systemValue = matchingSystemProp(system, 'value');
+    window.location.hash = '';
+    spellDetails('');
+    store.systems.current = system;
+    localStorage.setItem('system', systemValue);
+    view.spell_list.update({data: false});
+    view.class_list.update({data: false});
+    fetchSpells(systemValue);
+})
 
 /**
  * Fetch Spells
  */
-fetch('./spells.json')
+const fetchSpells = (system = matchingSystemProp(store.systems.current, 'value')) => fetch(`./systems/${system}.json`)
     .then(response => response.json())
     .then(spells => initSpells(spells))
     .then(spells => {
@@ -362,6 +406,8 @@ fetch('./spells.json')
         view.spell_list.update({data: applyFilters()});
         view.class_list.update(store.classes);
         componentHandler.upgradeDom();
-        if (window.location.hash) spellDetails(window.location.hash.substr(1));
+        if (window.location.hash) spellDetails(window.location.hash.substr(1).split('/')[1]);
+        return spells;
     })
     .catch(reason => console.error('Unable to retrieve spells list:', reason));
+fetchSpells();
