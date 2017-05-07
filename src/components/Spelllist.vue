@@ -1,5 +1,18 @@
 <template>
-  <table class="list">
+  <table class="spell-list q-table highlight compact striped-even">
+    <thead>
+      <tr>
+        <th class="text-left">
+          <big>Name</big>
+        </th>
+        <th class="text-left">
+          <big>School</big>
+        </th>
+        <th class="text-right">
+          <big>Level</big>
+        </th>
+      </tr>
+    </thead>
     <tr
       is="spell-item"
       v-for="spell in spells"
@@ -16,23 +29,13 @@ import SpellItem from './Spellitem'
 Vue.component('spell-item', SpellItem)
 
 export default {
-  data () {
-    return {
-      spells: [
-        {
-          title: 'example 1',
-          description: 'foo'
-        }, {
-          title: 'example 2',
-          description: 'bar'
-        }
-      ]
-    }
-  }
+  props: [
+    'spells'
+  ]
 }
 </script>
 
 <style scoped lang="stylus">
-  .list
+  .spell-list
     width: 100%
 </style>
