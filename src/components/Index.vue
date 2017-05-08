@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import { Loading } from 'quasar'
+import { Loading, Dialog } from 'quasar'
 import Vue from 'vue'
-import { state } from '../store'
+import { state, dispatch } from '../store'
 import SpellList from './Spelllist'
 import 'whatwg-fetch'
 
@@ -30,18 +30,29 @@ export default {
   mounted () {
     if (this.state.spells.loaded === false) {
       Loading.show()
-    }
 
-    fetch('./statics/dnd5e.json')
-    .then(response => response.json())
-    .then(spells => {
-      this.state.spells = {
-        loaded: true,
-        data: spells
-      }
-      Loading.hide()
-    })
-    .catch(reason => console.error('Unable to retrieve spells list:', reason))
+      fetch('./statics/dnd5e.json')
+      .then(response => response.json())
+      .then(spells => {
+        dispatch({
+          type: 'SPELLS_RESOLVED',
+          data: {
+            loaded: true,
+            data: spells
+          }
+        })
+      })
+      .catch(reason => {
+        let message = 'Unable to retrieve spells list'
+        Dialog.create({
+          title: 'Error',
+          message,
+          nobuttons: true
+        })
+        console.error(message, reason)
+      })
+      .then(() => { Loading.hide() })
+    }
   }
 }
 </script>
