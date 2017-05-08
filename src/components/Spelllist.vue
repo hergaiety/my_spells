@@ -51,12 +51,20 @@ Vue.component('spell-item', SpellItem)
 export default {
   computed: {
     pageMax () {
-      return this.spells.length / this.perPage
+      let trueMax = this.spells.length / this.perPage
+      return trueMax < 1 ? 1 : trueMax
     },
     pagedSpells () {
       let min = this.page * this.perPage - this.perPage
       let max = min + this.perPage
       return this.spells.slice(min, max)
+    }
+  },
+  watch: {
+    pageMax (newPageMax) {
+      if (this.page > newPageMax) {
+        this.page = newPageMax
+      }
     }
   },
   props: [
