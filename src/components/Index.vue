@@ -17,20 +17,7 @@ import { Loading } from 'quasar'
 import Vue from 'vue'
 import { state } from '../store'
 import SpellList from './Spelllist'
-// import 'whatwg-fetch'
-
-let temporaryData = {
-  loaded: true,
-  data: [
-    {
-      title: 'example 1',
-      description: 'foo'
-    }, {
-      title: 'example 2',
-      description: 'bar'
-    }
-  ]
-}
+import 'whatwg-fetch'
 
 Vue.component('spell-list', SpellList)
 
@@ -45,10 +32,16 @@ export default {
       Loading.show()
     }
 
-    setTimeout(() => {
-      this.state.spells = temporaryData
+    fetch('./statics/dnd5e.json')
+    .then(response => response.json())
+    .then(spells => {
+      this.state.spells = {
+        loaded: true,
+        data: spells
+      }
       Loading.hide()
-    }, 2000)
+    })
+    .catch(reason => console.error('Unable to retrieve spells list:', reason))
   }
 }
 </script>

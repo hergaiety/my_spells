@@ -2,7 +2,7 @@
   <tr>
     <td colspan="3">
       <q-collapsible
-        :label="spell.title"
+        :label="spell.name"
         group="spells"
       >
         {{spell.description}}
