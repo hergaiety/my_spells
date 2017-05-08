@@ -4,9 +4,9 @@
       <q-toolbar-title :padding="0">
         My Spells v2.0 
 
-          <q-search
-            v-model="search"
-          ></q-search>
+        <q-search
+          v-model="search"
+        ></q-search>
       </q-toolbar-title>
     </div>
 

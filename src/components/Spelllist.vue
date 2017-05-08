@@ -1,5 +1,5 @@
 <template>
-  <table class="spell-list q-table highlight compact striped-even">
+  <table class="spell-list q-table compact striped-odd">
     <thead>
       <tr>
         <th class="text-left">
@@ -13,12 +13,14 @@
         </th>
       </tr>
     </thead>
-    <tr
-      is="spell-item"
-      v-for="spell in spells"
-      :spell="spell"
-    >
-    </tr>
+    <tbody>
+      <tr
+        is="spell-item"
+        v-for="spell in spells"
+        :spell="spell"
+      >
+      </tr>
+    </tbody>
   </table>
 </template>
 
