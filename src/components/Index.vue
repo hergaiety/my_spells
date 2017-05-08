@@ -7,7 +7,7 @@
     </div>
 
     <div class="layout-view">
-      <spell-list :spells="store.data"></spell-list>
+      <spell-list :spells="state.spells.data"></spell-list>
     </div>
   </q-layout>
 </template>
@@ -15,8 +15,9 @@
 <script>
 import { Loading } from 'quasar'
 import Vue from 'vue'
+import { state } from '../store'
 import SpellList from './Spelllist'
-import 'whatwg-fetch'
+// import 'whatwg-fetch'
 
 let temporaryData = {
   loaded: true,
@@ -36,19 +37,16 @@ Vue.component('spell-list', SpellList)
 export default {
   data () {
     return {
-      store: {
-        loaded: false,
-        data: []
-      }
+      state
     }
   },
   mounted () {
-    if (this.store.loaded === false) {
+    if (this.state.spells.loaded === false) {
       Loading.show()
     }
 
     setTimeout(() => {
-      this.store = temporaryData
+      this.state.spells = temporaryData
       Loading.hide()
     }, 2000)
   }
