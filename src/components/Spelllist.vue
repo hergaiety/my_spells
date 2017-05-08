@@ -12,15 +12,33 @@
           <big>Level</big>
         </th>
       </tr>
+      <tr>
+        <td colspan="3">
+          <q-pagination
+            v-model="page"
+            :max="pageMax"
+          ></q-pagination>
+        </td>
+      </tr>
     </thead>
     <tbody>
       <tr
         is="spell-item"
-        v-for="spell in spells"
+        v-for="spell in pagedSpells"
         :spell="spell"
       >
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">
+          <q-pagination
+            v-model="page"
+            :max="pageMax"
+          ></q-pagination>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </template>
 
@@ -31,9 +49,25 @@ import SpellItem from './Spellitem'
 Vue.component('spell-item', SpellItem)
 
 export default {
+  computed: {
+    pageMax () {
+      return this.spells.length / this.perPage
+    },
+    pagedSpells () {
+      let min = this.page * this.perPage - this.perPage
+      let max = min + this.perPage
+      return this.spells.slice(min, max)
+    }
+  },
   props: [
     'spells'
-  ]
+  ],
+  data () {
+    return {
+      perPage: 10,
+      page: 1
+    }
+  }
 }
 </script>
 
