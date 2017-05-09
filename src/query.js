@@ -23,6 +23,7 @@ export default class Query {
   }
 
   sort (key = 'sortScore') {
+    debugger
     this.data = this.data.sort((a, b) => {
       if (a[key] < b[key]) return -1
       if (a[key] > b[key]) return 1
