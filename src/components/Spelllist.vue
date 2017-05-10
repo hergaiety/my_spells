@@ -10,18 +10,18 @@
         </td>
       </tr>
       <tr>
-        <th class="text-left">
-          <a
+        <th class="text-left no-padding">
+          <a class="sort-name"
             v-on:click="sortBy = 'name'"
           >Name</a>
         </th>
-        <th class="text-left">
-          <a
+        <th class="text-left no-padding">
+          <a class="sort-school"
             v-on:click="sortBy = 'school'"
           >School</a>
         </th>
-        <th class="text-right">
-          <a
+        <th class="text-right no-padding">
+          <a class="sort-level"
             v-on:click="sortBy = 'level'"
           >Level</a>
         </th>
@@ -97,6 +97,12 @@ export default {
   .spell-list
     width: 100%
   th a
-    padding: 1em
-    display: block
+    display: inline-block
+    padding: 1em 0
+    &.sort-name
+      margin-left: 1em
+      margin-right: -1em
+    &.sort-level
+      margin-left: -5em
+      margin-right: 5em
 </style>
