@@ -34,6 +34,7 @@ export default class Query {
   paginate (page = 1, perPage = 10) {
     let min = page * perPage - perPage
     let max = min + perPage
-    return this.data.slice(min, max)
+    this.data = this.data.slice(min, max)
+    return this
   }
 }

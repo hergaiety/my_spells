@@ -64,6 +64,7 @@ export default {
     pagedSpells () {
       return new Query(this.sortedSpells)
       .paginate(this.page, this.perPage)
+      .results
     },
     sortedSpells () {
       return this.spells
