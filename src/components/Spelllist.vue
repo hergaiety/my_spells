@@ -50,7 +50,7 @@
 
 <script>
 import Vue from 'vue'
-// import Query from '../query'
+import Query from '../query'
 import SpellItem from './Spellitem'
 
 Vue.component('spell-item', SpellItem)
@@ -62,9 +62,8 @@ export default {
       return trueMax < 1 ? 1 : trueMax
     },
     pagedSpells () {
-      let min = this.page * this.perPage - this.perPage
-      let max = min + this.perPage
-      return this.sortedSpells.slice(min, max)
+      return new Query(this.sortedSpells)
+      .paginate(this.page, this.perPage)
     },
     sortedSpells () {
       return this.spells
