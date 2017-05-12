@@ -10,20 +10,20 @@
         </td>
       </tr>
       <tr>
-        <th class="text-left no-padding">
-          <a class="sort-name"
+        <th class="sort-level">
+          <a
+            v-on:click="sortBy = 'level'"
+          >Level</a>
+        </th>
+        <th class="sort-name">
+          <a
             v-on:click="sortBy = 'name'"
           >Name</a>
         </th>
-        <th class="text-left no-padding">
-          <a class="sort-school"
+        <th class="sort-school">
+          <a
             v-on:click="sortBy = 'school'"
           >School</a>
-        </th>
-        <th class="text-right no-padding">
-          <a class="sort-level"
-            v-on:click="sortBy = 'level'"
-          >Level</a>
         </th>
       </tr>
     </thead>
@@ -100,13 +100,13 @@ export default {
 <style scoped lang="stylus">
   .spell-list
     width: 100%
-  th a
-    display: inline-block
-    padding: 1em 0
-    &.sort-name
-      margin-left: 1em
-      margin-right: -1em
-    &.sort-level
-      margin-left: -5em
-      margin-right: 5em
+    th
+      a
+        display: inline-block
+        padding: 1em 0
+      &.sort-level
+        padding-left: 1em
+        width: 5em
+      &.sort-name
+        padding-left: 1em
 </style>
