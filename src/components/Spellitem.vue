@@ -22,7 +22,6 @@ export default {
       return this.level + this.schoolCapitalized + '\n' + this.spell.name
     },
     schoolCapitalized () {
-      debugger
       return this.spell.school.charAt(0).toUpperCase() + this.spell.school.slice(1)
     }
   },

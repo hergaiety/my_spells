@@ -12,7 +12,9 @@
 
     <div class="layout-view">
       <spell-list
-        :spells="spells"
+        v-if="state.spells.data.length"
+        :spells="state.spells.data"
+        :search="search"
       ></spell-list>
     </div>
   </q-layout>
@@ -22,27 +24,12 @@
 import { Loading, Dialog } from 'quasar'
 import Vue from 'vue'
 import 'whatwg-fetch'
-import Query from '../query'
 import { state, dispatch } from '../store'
 import SpellList from './Spelllist'
 
 Vue.component('spell-list', SpellList)
 
 export default {
-  computed: {
-    spells () {
-      if (this.state.spells.data.length === 0) {
-        return []
-      }
-
-      let sortBy = this.search.length >= 3 ? 'sortScore' : 'name'
-
-      return new Query(this.state.spells.data)
-      .search('name', this.search, 5)
-      .sort(sortBy)
-      .results
-    }
-  },
   data () {
     return {
       state,
@@ -78,6 +65,3 @@ export default {
   }
 }
 </script>
-
-<style lang="styl">
-</style>

@@ -56,21 +56,15 @@ import SpellItem from './Spellitem'
 Vue.component('spell-item', SpellItem)
 
 export default {
-  computed: {
-    pageMax () {
-      let trueMax = this.spells.length / this.perPage
-      return trueMax < 1 ? 1 : trueMax
-    },
-    pagedSpells () {
-      return new Query(this.sortedSpells)
-      .paginate(this.page, this.perPage)
-      .results
-    },
-    sortedSpells () {
-      return this.spells
-      // return new Query(this.spells)
-      // .sort(this.sortBy)
-      // .results
+  props: [
+    'spells',
+    'search'
+  ],
+  data () {
+    return {
+      perPage: 10,
+      page: 1,
+      sortBy: 'name'
     }
   },
   watch: {
@@ -80,14 +74,24 @@ export default {
       }
     }
   },
-  props: [
-    'spells'
-  ],
-  data () {
-    return {
-      perPage: 10,
-      page: 1,
-      sortBy: 'name'
+  computed: {
+    pageMax () {
+      let trueMax = this.filteredSpells.length / this.perPage
+      return trueMax < 1 ? 1 : trueMax
+    },
+    dynamicSortBy () {
+      return this.search.length >= 3 ? 'sortScore' : 'name'
+    },
+    pagedSpells () {
+      return new Query(this.filteredSpells)
+      .paginate(this.page, this.perPage)
+      .results
+    },
+    filteredSpells () {
+      return new Query(this.spells)
+      .search('name', this.search, 5)
+      .sort(this.dynamicSortBy)
+      .results
     }
   }
 }
