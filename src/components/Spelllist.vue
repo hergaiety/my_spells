@@ -77,12 +77,12 @@ export default {
     }
   },
   computed: {
+    dynamicSortBy () {
+      return this.search.length >= 3 ? 'sortScore' : this.sortBy
+    },
     pageMax () {
       let trueMax = this.filteredSpells.length / this.perPage
       return trueMax < 1 ? 1 : trueMax
-    },
-    dynamicSortBy () {
-      return this.search.length >= 3 ? 'sortScore' : 'name'
     },
     pagedSpells () {
       return new Query(this.filteredSpells)
@@ -92,7 +92,7 @@ export default {
     filteredSpells () {
       return new Query(this.spells)
       .search('name', this.search, 5)
-      .sort(this.dynamicSortBy)
+      .sort(this.sortBy)
       .results
     }
   }
