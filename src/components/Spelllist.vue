@@ -4,6 +4,7 @@
       <tr>
         <td colspan="3">
           <q-pagination
+            class="text-center"
             v-model="page"
             :max="pageMax"
           ></q-pagination>
@@ -39,6 +40,7 @@
       <tr>
         <td colspan="3">
           <q-pagination
+            class="text-center"
             v-model="page"
             :max="pageMax"
           ></q-pagination>
