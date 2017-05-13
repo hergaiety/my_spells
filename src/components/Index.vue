@@ -5,6 +5,7 @@
         My Spells v2.0 
 
         <q-search
+          class="primary"
           v-model="search"
         ></q-search>
       </q-toolbar-title>

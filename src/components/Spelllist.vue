@@ -1,53 +1,13 @@
 <template>
-  <table class="spell-list q-table compact striped-odd">
-    <thead>
-      <tr>
-        <td colspan="3">
-          <q-pagination
-            class="text-center"
-            v-model="page"
-            :max="pageMax"
-          ></q-pagination>
-        </td>
-      </tr>
-      <tr>
-        <th class="sort-level">
-          <a
-            v-on:click="sortBy = 'level'"
-          >Level</a>
-        </th>
-        <th class="sort-name">
-          <a
-            v-on:click="sortBy = 'name'"
-          >Name</a>
-        </th>
-        <th class="sort-school">
-          <a
-            v-on:click="sortBy = 'school'"
-          >School</a>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        is="spell-item"
-        v-for="spell in pagedSpells"
-        :spell="spell"
-      >
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="3">
-          <q-pagination
-            class="text-center"
-            v-model="page"
-            :max="pageMax"
-          ></q-pagination>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
+  <div class="list striped no-border">
+    <label
+      is="spell-item"
+      class="item two-line item-link"
+      v-for="spell in pagedSpells"
+      :spell="spell"
+    >
+    </label>
+  </div>
 </template>
 
 <script>

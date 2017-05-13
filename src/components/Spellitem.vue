@@ -1,49 +1,49 @@
 <template>
-  <tr class="spell">
-    <td class="spell-level">
+  <div>
+    <div class="item-primary">
       {{level}}
-    </td>
-    <td colspan="2" class="spell-label">
-      <q-collapsible
-        group="spells"
-        :label="label"
-      >
-
-        <p>{{spell.description}}</p>
-      </q-collapsible>
-    </td>
-  </tr>
+    </div>
+    <div class="item-content has-secondary" v-on:click="openSpell">
+      <div>
+        {{spell.name}}
+      </div>
+      <div>
+        {{classes}}
+      </div>
+    </div>
+    <div class="item-secondary">
+      <q-checkbox v-model="checked" disable></q-checkbox>
+    </div>
+  </div>
 </template>
 
 <script>
+let capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
+
 export default {
   computed: {
     level () {
       return this.spell.level.toLowerCase() === 'cantrip' ? '0' : this.spell.level.charAt(0)
     },
-    label () {
-      return this.schoolCapitalized + '\n' + this.spell.name
+    school () {
+      return capitalize(this.spell.school)
     },
-    schoolCapitalized () {
-      return this.spell.school.charAt(0).toUpperCase() + this.spell.school.slice(1)
+    classes () {
+      return this.spell.classes.map(cla => capitalize(cla)).join(', ')
+    }
+  },
+  data () {
+    return {
+      checked: false
     }
   },
   props: [
     'spell'
-  ]
+  ],
+  methods: {
+    openSpell (event) {
+      console.log(this.spell.name)
+    }
+  }
 }
 </script>
-
-<style lang="stylus">
-  .spell
-    .item-content
-        position: relative
-        & > *
-          white-space: pre-line !important
-          overflow: visible !important
-          line-height: 0
-          padding-top: .5em
-          text-indent: 55%
-    .spell-level
-      padding-left: 1em !important
-</style>
