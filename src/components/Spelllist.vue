@@ -37,7 +37,6 @@ export default {
       return this.search.length >= 3 ? 'sortScore' : this.sortBy
     },
     pagedSpells () {
-      debugger
       return new Query(this.filteredSpells)
       .paginate(1, this.loadedPage * 20)
       .results

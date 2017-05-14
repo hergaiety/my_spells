@@ -13,7 +13,6 @@
 
     <div class="layout-view">
       <spell-list
-        v-if="state.spells.data.length"
         :spells="state.spells.data"
         :search="search"
       ></spell-list>
@@ -58,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    if (this.state.spells.loaded === false) {
+    if (!this.state.spells.loaded) {
       Loading.show()
 
       fetch('./statics/dnd5e.json')

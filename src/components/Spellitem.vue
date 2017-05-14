@@ -12,12 +12,17 @@
       </div>
     </div>
     <div class="item-secondary">
-      <q-checkbox v-model="checked" disable></q-checkbox>
+      <q-checkbox
+        v-model="checked"
+        @input="toggle"
+      ></q-checkbox>
     </div>
   </div>
 </template>
 
 <script>
+import { state, dispatch } from '../store'
+
 let capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 export default {
@@ -43,6 +48,16 @@ export default {
   methods: {
     openSpell (event) {
       console.log(this.spell.name)
+    },
+    toggle (want) {
+      dispatch({
+        type: 'CHANGE_CHOSEN',
+        data: {
+          want,
+          name: this.spell.name
+        }
+      })
+      console.log(state.chosen)
     }
   }
 }
