@@ -37,6 +37,7 @@ export default {
       return this.search.length >= 3 ? 'sortScore' : this.sortBy
     },
     pagedSpells () {
+      debugger
       return new Query(this.filteredSpells)
       .paginate(1, this.loadedPage * 20)
       .results
@@ -49,8 +50,9 @@ export default {
     }
   },
   methods: {
-    loadMore (index) {
-      this.loadedPage += index
+    loadMore (index, done) {
+      this.loadedPage += 1
+      done()
     }
   },
   watch: {
