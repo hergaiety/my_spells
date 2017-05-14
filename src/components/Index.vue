@@ -30,6 +30,26 @@ import SpellList from './Spelllist'
 
 Vue.component('spell-list', SpellList)
 
+function fetchSuccess (data) {
+  dispatch({
+    type: 'SPELLS_RESOLVED',
+    data: {
+      data,
+      loaded: true
+    }
+  })
+}
+
+function fetchFailure (reason) {
+  let message = 'Unable to retrieve spells list'
+  Dialog.create({
+    title: 'Error',
+    message,
+    nobuttons: true
+  })
+  console.error(message, reason)
+}
+
 export default {
   data () {
     return {
@@ -43,24 +63,8 @@ export default {
 
       fetch('./statics/dnd5e.json')
       .then(response => response.json())
-      .then(spells => {
-        dispatch({
-          type: 'SPELLS_RESOLVED',
-          data: {
-            loaded: true,
-            data: spells
-          }
-        })
-      })
-      .catch(reason => {
-        let message = 'Unable to retrieve spells list'
-        Dialog.create({
-          title: 'Error',
-          message,
-          nobuttons: true
-        })
-        console.error(message, reason)
-      })
+      .then(fetchSuccess)
+      .catch(fetchFailure)
       .then(() => { Loading.hide() })
     }
   }
