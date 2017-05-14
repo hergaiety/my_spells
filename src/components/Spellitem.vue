@@ -13,7 +13,7 @@
     </div>
     <div class="item-secondary">
       <i
-        class="float-left"
+        class="float-left text-primary"
         v-if="checked"
         v-on:click="checked = false"
       >bookmark</i>
