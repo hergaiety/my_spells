@@ -1,13 +1,17 @@
 <template>
-  <div class="list striped no-border">
+  <section 
+    is="q-infinite-scroll"
+    :handler="loadMore"
+    class="spell-list list striped no-border"
+  >
     <label
       is="spell-item"
-      class="item two-line item-link"
+      class="item two-lines item-link"
       v-for="spell in pagedSpells"
       :spell="spell"
     >
     </label>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -24,29 +28,18 @@ export default {
   ],
   data () {
     return {
-      perPage: 10,
-      page: 1,
+      loadedPage: 1,
       sortBy: 'name'
-    }
-  },
-  watch: {
-    pageMax (newPageMax) {
-      if (this.page > newPageMax) {
-        this.page = newPageMax
-      }
     }
   },
   computed: {
     dynamicSortBy () {
       return this.search.length >= 3 ? 'sortScore' : this.sortBy
     },
-    pageMax () {
-      let trueMax = this.filteredSpells.length / this.perPage
-      return trueMax < 1 ? 1 : trueMax
-    },
     pagedSpells () {
+      debugger
       return new Query(this.filteredSpells)
-      .paginate(this.page, this.perPage)
+      .paginate(1, this.loadedPage * 20)
       .results
     },
     filteredSpells () {
@@ -54,6 +47,12 @@ export default {
       .search('name', this.search, 5)
       .sort(this.sortBy)
       .results
+    }
+  },
+  methods: {
+    loadMore (index) {
+      console.log('load more!', index)
+      this.loadedPage += index
     }
   }
 }
