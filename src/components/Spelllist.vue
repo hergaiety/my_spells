@@ -37,7 +37,6 @@ export default {
       return this.search.length >= 3 ? 'sortScore' : this.sortBy
     },
     pagedSpells () {
-      debugger
       return new Query(this.filteredSpells)
       .paginate(1, this.loadedPage * 20)
       .results
@@ -51,7 +50,6 @@ export default {
   },
   methods: {
     loadMore (index) {
-      console.log('load more!', index)
       this.loadedPage += index
     }
   },
@@ -62,17 +60,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="stylus">
-  .spell-list
-    width: 100%
-    th
-      a
-        display: inline-block
-        padding: 1em 0
-      &.sort-level
-        padding-left: 1em
-        width: 5em
-      &.sort-name
-        padding-left: 1em
-</style>
