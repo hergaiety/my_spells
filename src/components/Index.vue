@@ -3,12 +3,34 @@
     <div slot="header" class="toolbar">
       <q-toolbar-title :padding="0">
         My Spells v2.0 
-
-        <q-search
-          class="primary"
-          v-model="search"
-        ></q-search>
       </q-toolbar-title>
+
+      <button v-on:click="copy">
+        <i>file_download</i>
+        <q-tooltip
+          anchor="bottom right"
+          self="top right"
+        >
+          Export Chosen Spells
+        </q-tooltip>
+      </button>
+
+      <button v-on:click="paste">
+        <i>cloud_upload</i>
+        <q-tooltip
+          anchor="bottom right"
+          self="top right"
+        >
+          Import Chosen Spells
+        </q-tooltip>
+      </button>
+    </div>
+
+    <div slot="header" class="toolbar primary">
+      <q-search
+        class="primary"
+        v-model="search"
+      ></q-search>
     </div>
 
     <div class="layout-view">
@@ -65,6 +87,14 @@ export default {
       .then(fetchSuccess)
       .catch(fetchFailure)
       .then(() => { Loading.hide() })
+    }
+  },
+  methods: {
+    copy () {
+      console.log('Copy Chosen!', this.state.chosen)
+    },
+    paste () {
+      console.log('Load Chosen!')
     }
   }
 }
