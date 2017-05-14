@@ -12,7 +12,18 @@
       </div>
     </div>
     <div class="item-secondary">
+      <i
+        class="float-left"
+        v-if="checked"
+        v-on:click="checked = false"
+      >bookmark</i>
+      <i
+        class="float-left"
+        v-else
+        v-on:click="checked = true"
+      >bookmark_border</i>
       <q-checkbox
+        class="float-right"
         v-model="checked"
         @input="toggle"
       ></q-checkbox>
@@ -35,11 +46,14 @@ export default {
     },
     classes () {
       return this.spell.classes.map(cla => capitalize(cla)).join(', ')
+    },
+    checked () {
+      return this.state.chosen.indexOf(this.spell.name) >= 0
     }
   },
   data () {
     return {
-      checked: false
+      state
     }
   },
   props: [
@@ -62,3 +76,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="stylus">
+  .item-secondary
+    width: 50px
+</style>

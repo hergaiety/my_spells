@@ -11,7 +11,7 @@
           anchor="bottom right"
           self="top right"
         >
-          Export Chosen Spells
+          Export Selected Spells
         </q-tooltip>
       </button>
 
@@ -21,7 +21,7 @@
           anchor="bottom right"
           self="top right"
         >
-          Import Chosen Spells
+          Import Selected Spells
         </q-tooltip>
       </button>
     </div>
@@ -33,12 +33,38 @@
       ></q-search>
     </div>
 
-    <div class="layout-view">
-      <spell-list
-        :spells="state.spells.data"
-        :search="search"
-      ></spell-list>
+    <div slot="header" class="toolbar primary">
+      <q-tabs
+        :refs="$refs"
+        default-tab="tab-all"
+      >
+        <q-tab name="tab-all" icon="local_library">
+          All Spells
+        </q-tab>
+        <q-tab name="tab-my" icon="bookmark">
+          My Spells
+        </q-tab>
+      </q-tabs>
     </div>
+
+    <div class="layout-view">
+      <section ref="tab-all">
+        <spell-list
+          :spells="state.spells.data"
+          :search="search"
+        ></spell-list>
+      </section>
+
+      <section ref="tab-my">
+        <spell-list
+          v-if="mySpells.length"
+          :spells="mySpells"
+          :search="search"
+        ></spell-list>
+        <div v-else>None :D</div>
+      </section>
+    </div>
+
   </q-layout>
 </template>
 
@@ -76,6 +102,19 @@ export default {
     return {
       state,
       search: ''
+    }
+  },
+  computed: {
+    mySpells () {
+      if (!this.state.spells.loaded || this.state.chosen.length === 0) {
+        return []
+      }
+
+      return this.state.chosen.map(chosen => {
+        return this.state.spells.data.find(spell => {
+          return spell.name === chosen
+        })
+      })
     }
   },
   mounted () {
