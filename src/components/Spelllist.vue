@@ -54,6 +54,11 @@ export default {
       console.log('load more!', index)
       this.loadedPage += index
     }
+  },
+  watch: {
+    search () {
+      this.loadedPage = 1
+    }
   }
 }
 </script>
