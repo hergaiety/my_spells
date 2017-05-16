@@ -3,7 +3,11 @@ export let state = {
     loaded: false,
     data: []
   },
-  chosen: []
+  chosen: [],
+  search: '',
+  sortBy: 'name',
+  previousSortBy: 'name',
+  loadedPagination: 1
 }
 
 export function dispatch (action) {
@@ -20,10 +24,10 @@ export function dispatch (action) {
         if (index >= 0) state.chosen.splice(index, 1)
       }
       break
+    case 'SEARCH_CHANGED':
+      state.loadedPagination = 1
+      break
   }
 }
 
-export default {
-  state,
-  dispatch
-}
+export default { state, dispatch }

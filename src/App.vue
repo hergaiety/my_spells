@@ -1,15 +1,75 @@
 <template>
-  <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    <router-view></router-view>
+    <q-layout>
+      <nav-header-primary
+        slot="header"
+        class="toolbar dark"
+      ></nav-header-primary>
+
+      <nav-header-secondary
+        slot="header"
+        class="toolbar dark"
+      ></nav-header-secondary>
+
+      <div class="layout-view">
+        <router-view></router-view>
+      </div>
+
+      <nav-footer
+        slot="footer"
+        class="toolbar pink"
+      ></nav-footer>
+    </q-layout>
   </div>
 </template>
 
 <script>
-/*
- * Root component
- */
-export default {}
-</script>
+import { Loading, Dialog } from 'quasar'
+import Vue from 'vue'
+import 'whatwg-fetch'
+import { state, dispatch } from './store'
+import HeaderPrimary from './components/Headerprimary'
+import HeaderSecondary from './components/Headersecondary'
+import Footer from './components/Footer'
 
-<style></style>
+Vue.component('nav-header-primary', HeaderPrimary)
+Vue.component('nav-header-secondary', HeaderSecondary)
+Vue.component('nav-footer', Footer)
+
+function fetchSuccess (data) {
+  dispatch({
+    type: 'SPELLS_RESOLVED',
+    data: {
+      data,
+      loaded: true
+    }
+  })
+}
+
+function fetchFailure (reason) {
+  let message = 'Unable to retrieve spells list'
+  Dialog.create({
+    title: 'Error',
+    message,
+    nobuttons: true
+  })
+  console.error(message, reason)
+}
+
+export default {
+  data () {
+    return { state }
+  },
+  mounted () {
+    if (!this.state.spells.loaded) {
+      Loading.show()
+
+      fetch('./statics/dnd5e.json')
+      .then(response => response.json())
+      .then(fetchSuccess)
+      .catch(fetchFailure)
+      .then(() => { Loading.hide() })
+    }
+  }
+}
+</script>

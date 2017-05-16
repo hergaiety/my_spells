@@ -18,41 +18,30 @@
 import Vue from 'vue'
 import Query from '../query'
 import SpellItem from './Spellitem'
+import { state } from '../store'
 
 Vue.component('spell-item', SpellItem)
 
 export default {
-  props: [
-    'spells',
-    'search',
-    'sortBy'
-  ],
   data () {
-    return {
-      loadedPage: 1
-    }
+    return { state }
   },
+  props: [
+    'spells'
+  ],
   computed: {
     filteredSpells () {
       return new Query(this.spells)
-      .search('name', this.search)
-      .sort(this.sortBy)
-      .paginate(1, this.loadedPage * 20)
+      .search('name', this.state.search)
+      .sort(this.state.sortBy)
+      .paginate(1, this.state.loadedPagination * 20)
       .results
     }
   },
   methods: {
     loadMore (index, done) {
-      this.loadedPage += 1
+      this.state.loadedPagination += 1
       done()
-    }
-  },
-  watch: {
-    sortBy (newSort) {
-      console.log(newSort)
-    },
-    search () {
-      this.loadedPage = 1
     }
   }
 }
