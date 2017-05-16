@@ -24,12 +24,12 @@ Vue.component('spell-item', SpellItem)
 export default {
   props: [
     'spells',
-    'search'
+    'search',
+    'sortBy'
   ],
   data () {
     return {
-      loadedPage: 1,
-      sortBy: 'name'
+      loadedPage: 1
     }
   },
   computed: {
@@ -48,9 +48,17 @@ export default {
     }
   },
   watch: {
+    sortBy (newSort) {
+      console.log(newSort)
+    },
     search () {
       this.loadedPage = 1
     }
   }
 }
 </script>
+
+<style lang="stylus">
+.toolbar > .q-picker-textfield
+  margin: 0 .75em
+</style>

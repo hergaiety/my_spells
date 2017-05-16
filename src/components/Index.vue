@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <div slot="header" class="toolbar">
+    <div slot="header" class="toolbar dark">
       <q-toolbar-title :padding="0">
         My Spells v2.0 
       </q-toolbar-title>
@@ -26,25 +26,18 @@
       </button>
     </div>
 
-    <div slot="header" class="toolbar primary">
-      <q-search
-        class="primary"
-        v-model="search"
-      ></q-search>
-    </div>
+    <div slot="header" class="toolbar dark">
+      <q-select
+        type="list"
+        v-model="sortBy"
+        :options="sortByOptions"
+      ></q-select>
 
-    <div slot="header" class="toolbar primary">
-      <q-tabs
-        :refs="$refs"
-        default-tab="tab-all"
-      >
-        <q-tab name="tab-all" icon="local_library">
-          All Spells
-        </q-tab>
-        <q-tab name="tab-my" icon="bookmark">
-          My Spells
-        </q-tab>
-      </q-tabs>
+      <q-search
+        class="dark"
+        v-model="search"
+        @input="searchChanged"
+      ></q-search>
     </div>
 
     <div class="layout-view">
@@ -52,6 +45,7 @@
         <spell-list
           :spells="state.spells.data"
           :search="search"
+          :sortBy="sortBy"
         ></spell-list>
       </section>
 
@@ -60,11 +54,30 @@
           v-if="mySpells.length"
           :spells="mySpells"
           :search="search"
+          :sortBy="sortBy"
         ></spell-list>
         <div v-else>None :D</div>
       </section>
     </div>
 
+    <footer slot="footer" class="toolbar pink">
+      <q-tabs
+        class="pink justified"
+        :refs="$refs"
+        default-tab="tab-all"
+      >
+        <q-tab name="tab-all" icon="local_library">
+          All Spells
+        </q-tab>
+        <q-tab name="tab-my" icon="bookmark">
+          My Spells
+          <span
+            class="label pointing-left bg-yellow text-dark"
+            v-show="mySpells.length"
+          >{{mySpells.length}}</span>
+        </q-tab>
+      </q-tabs>
+    </footer>
   </q-layout>
 </template>
 
@@ -101,7 +114,27 @@ export default {
   data () {
     return {
       state,
-      search: ''
+      search: '',
+      sortBy: 'name',
+      previousSortBy: 'name',
+      sortByOptions: [
+        {
+          label: 'Relevance',
+          value: 'sortScore'
+        },
+        {
+          label: 'Name',
+          value: 'name'
+        },
+        {
+          label: 'Level',
+          value: 'level'
+        },
+        {
+          label: 'School',
+          value: 'school'
+        }
+      ]
     }
   },
   computed: {
@@ -134,7 +167,21 @@ export default {
     },
     paste () {
       console.log('Load Chosen!')
+    },
+    searchChanged (newSearch) {
+      if (newSearch.length >= 3) {
+        this.previousSortBy = this.sortBy
+        this.sortBy = 'sortScore'
+      }
+      else {
+        this.sortBy = this.previousSortBy
+      }
     }
   }
 }
 </script>
+
+<style scoped lang="stylus">
+  footer .q-tabs
+    width: 100%
+</style>
