@@ -7,7 +7,7 @@
     <label
       is="spell-item"
       class="item two-lines item-link"
-      v-for="spell in pagedSpells"
+      v-for="spell in filteredSpells"
       :spell="spell"
     >
     </label>
@@ -33,18 +33,11 @@ export default {
     }
   },
   computed: {
-    dynamicSortBy () {
-      return this.search.length >= 3 ? 'sortScore' : this.sortBy
-    },
-    pagedSpells () {
-      return new Query(this.filteredSpells)
-      .paginate(1, this.loadedPage * 20)
-      .results
-    },
     filteredSpells () {
       return new Query(this.spells)
-      .search('name', this.search, 5)
+      .search('name', this.search)
       .sort(this.sortBy)
+      .paginate(1, this.loadedPage * 20)
       .results
     }
   },
