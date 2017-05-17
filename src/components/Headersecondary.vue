@@ -19,13 +19,11 @@ import { state, dispatch } from '../store'
 
 export default {
   data () {
-    return {
-      state,
-      sortByOptions: [
-        {
-          label: 'Relevance',
-          value: 'sortScore'
-        },
+    return { state }
+  },
+  computed: {
+    sortByOptions () {
+      let options = [
         {
           label: 'Name',
           value: 'name'
@@ -33,12 +31,17 @@ export default {
         {
           label: 'Level',
           value: 'level'
-        },
-        {
-          label: 'School',
-          value: 'school'
         }
       ]
+
+      if (this.state.search.length >= 3) {
+        options.unshift({
+          label: 'Relevance',
+          value: 'sortScore'
+        })
+      }
+
+      return options
     }
   },
   methods: {
