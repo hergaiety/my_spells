@@ -61,7 +61,7 @@ export default {
   ],
   methods: {
     openSpell (event) {
-      console.log(this.spell.name)
+      this.$router.push('/spell/' + this.spell.name)
     },
     toggle (want) {
       dispatch({

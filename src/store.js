@@ -7,7 +7,7 @@ export let state = {
   search: '',
   sortBy: 'name',
   previousSortBy: 'name',
-  loadedPagination: 1
+  page: 1
 }
 
 export function dispatch (action) {
