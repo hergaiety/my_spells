@@ -33,8 +33,7 @@
 
 <script>
 import { state, dispatch } from '../store'
-
-let capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
+import { capitalize } from '../utils'
 
 export default {
   computed: {
@@ -52,9 +51,7 @@ export default {
     }
   },
   data () {
-    return {
-      state
-    }
+    return { state }
   },
   props: [
     'spell'
