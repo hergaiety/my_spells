@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-bind:class="{'checked': checked}">
     <div class="item-primary">
       {{level}}
     </div>

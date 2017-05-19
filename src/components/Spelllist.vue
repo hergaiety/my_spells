@@ -69,6 +69,10 @@ export default {
 </script>
 
 <style lang="stylus">
-.toolbar > .q-picker-textfield
-  margin: 0 .75em
+  .toolbar > .q-picker-textfield
+    margin: 0 .75em
+  .list.striped .item:nth-child(2n).checked
+    background: #fff9c4
+  .list.striped .item:nth-child(2n+1).checked
+    background: #fffde7
 </style>
