@@ -27,9 +27,10 @@
       <ol class="list no-border">
         <li class="item">
           <i class="item-primary">short_text</i>
-          <div class="item-content">
-            {{spell.description}}
-          </div>
+          <div
+            class="item-content description"
+            v-html="prettyDescription"
+          ></div>
         </li>
         <li class="item">
           <i class="item-primary">accessibility</i>
@@ -69,6 +70,7 @@
 <script>
 import { state } from '../store'
 import { capitalize } from '../utils'
+import Marked from 'marked'
 
 export default {
   data () {
@@ -83,6 +85,17 @@ export default {
     },
     classes () {
       return this.spell.classes.map(cla => capitalize(cla)).join(', ')
+    },
+    prettyDescription () {
+      let newDescription = this.spell.description
+      let keywords = ['constitution', 'con', 'intelligence', 'int', 'wisdom', 'wis', 'strength', 'str', 'dexterity', 'dex', 'charisma', 'cha', 'comeliness', 'com', 'saving throw', 'ability check', 'skill check']
+      keywords.forEach(word => {
+        let r = new RegExp(` ${word} `, 'gi')
+        newDescription = newDescription.replace(r, o => ` _${o.trim()}_ `)
+      })
+
+      newDescription = newDescription.replace(/[\s()<>]+\d+d*\d*(th)*[\s()<>]+/gi, o => ` **${o.trim()}** `)
+      return Marked(newDescription)
     }
   }
 }
@@ -101,6 +114,8 @@ export default {
   .card
     margin: 0 auto
     max-width: 40rem
+  .description
+    padding-bottom: 0
   .card-title .label
     margin-left: .5em
   .list
