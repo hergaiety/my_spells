@@ -1,49 +1,68 @@
 <template>
-  <div>
-    <h1>
-      {{spell.name}}
-      <span class="label circular bg-primary text-white">
-        {{level}}
-      </span>
-    </h1>
-    <ol class="list no-border">
-      <li class="item">
-        <i class="item-primary">accessibility</i>
-        <div class="item-content">
-          {{classes}}
-        </div>
-      </li>
-      <li class="item">
-        <i class="item-primary">group_work</i>
-        <div class="item-content">
-          {{spell.components.raw}}
-        </div>
-      </li>
-      <li class="item">
-        <i class="item-primary">school</i>
-        <div class="item-content">
-          {{spell.school}}
-        </div>
-      </li>
-      <li class="item">
-        <i class="item-primary">hourglass_full</i>
-        <div class="item-content">
-          {{spell.duration}}
-        </div>
-      </li>
-      <li class="item">
-        <i class="item-primary">av_timer</i>
-        <div class="item-content">
-          {{spell.casting_time}}
-        </div>
-      </li>
-      <li class="item">
-        <i class="item-primary">short_text</i>
-        <div class="item-content">
-          {{spell.description}}
-        </div>
-      </li>
-    </ol>
+  <div class="page-spell">
+    <router-link
+      tag="button"
+      to="/"
+      class="page-back-small primary shadow-1"
+    >
+      <i>arrow_back</i>
+      Back
+    </router-link>
+
+    <router-link
+      tag="button"
+      to="/"
+      class="page-back-big primary circular big shadow-2"
+    >
+      <i>arrow_back</i>
+    </router-link>
+
+    <div class="card bg-white">
+      <div class="card-title bg-pink text-white">
+        {{spell.name}}
+        <span class="label bg-white text-pink">
+          Level {{level}}
+        </span>
+      </div>
+      <ol class="list no-border">
+        <li class="item">
+          <i class="item-primary">short_text</i>
+          <div class="item-content">
+            {{spell.description}}
+          </div>
+        </li>
+        <li class="item">
+          <i class="item-primary">accessibility</i>
+          <div class="item-content">
+            {{classes}}
+          </div>
+        </li>
+        <li class="item">
+          <i class="item-primary">group_work</i>
+          <div class="item-content">
+            {{spell.components.raw}}
+          </div>
+        </li>
+        <li class="item">
+          <i class="item-primary">school</i>
+          <div class="item-content">
+            {{spell.school}}
+          </div>
+        </li>
+        <li class="item">
+          <i class="item-primary">hourglass_full</i>
+          <div class="item-content">
+            {{spell.duration}}
+          </div>
+        </li>
+        <li class="item">
+          <i class="item-primary">av_timer</i>
+          <div class="item-content">
+            {{spell.casting_time}}
+          </div>
+        </li>
+      </ol>
+    </div>
   </div>
 </template>
 
@@ -69,5 +88,40 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="stylus">
+  .page-spell
+    width: 100%
+    height: 100%
+    position: relative
+    padding: 1rem
+  .page-back-small
+    margin-bottom: 1rem
+  .page-back-big
+    display: none
+  .card
+    margin: 0 auto
+    max-width: 40rem
+  .card-title .label
+    margin-left: .5em
+  .list
+    padding-left: 16px
+  .item
+    height: auto
+    .item-primary
+      margin: 12px 0
+    .item-content
+      margin-left: 50px
+  @media screen and (min-height: 800px)
+    .card
+      position: relative
+      top: 50%
+      transform: translateY(-50%)
+    .page-back-big
+      display: block
+      position: absolute
+      top: 1rem
+      left: 1rem
+      z-index: 1
+    .page-back-small
+      display: none
 </style>

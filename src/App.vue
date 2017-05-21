@@ -1,6 +1,6 @@
 <template>
   <div id="q-app">
-    <q-layout>
+    <q-layout class="bg-light">
       <nav-header-primary
         slot="header"
         class="toolbar dark"
@@ -73,3 +73,9 @@ export default {
   }
 }
 </script>
+
+
+<style lang="stylus">
+  .toolbar > .q-picker-textfield
+    margin: 0 .75em
+</style>
