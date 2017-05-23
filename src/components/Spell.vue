@@ -76,6 +76,9 @@ export default {
   data () {
     return { state }
   },
+  mounted () {
+    state.lastSpell = this.state.spell.data.name
+  },
   computed: {
     spell () {
       return this.state.spells.data.find(spell => spell.name === this.$route.params.name)

@@ -4,25 +4,23 @@
       v-if="mySpells.length"
       :spells="mySpells"
     ></spell-list>
-    <div
-      class="empty text-center"
+    <page-empty
       v-else
+      title="You haven't chosen any spells"
     >
-      <h1>
-        You haven't chosen any spells
-      </h1>
-      <p>
-        You must <i>bookmark</i> bookmark spells from the <router-link to="/">All Spells</router-link> page.
-      </p>
-    </div>
+      Try <i>bookmark</i> bookmarking spells from the
+      <router-link to="/">all spells page</router-link> to add to your spellbook.
+    </page-empty>
   </main>
 </template>
 
 <script>
 import Vue from 'vue'
+import Empty from './Empty'
 import SpellList from './Spelllist'
 import { state } from '../store'
 
+Vue.component('page-empty', Empty)
 Vue.component('spell-list', SpellList)
 
 export default {
@@ -48,7 +46,4 @@ export default {
 <style scoped lang="stylus">
   main
     height: 90%
-    background-image: url('/statics/wand.svg')
-    background-repeat: no-repeat
-    background-position: top center
 </style>
