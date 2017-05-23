@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <q-select
       type="list"
       v-model="state.sortBy"
@@ -7,7 +7,6 @@
     ></q-select>
 
     <q-search
-      class="dark"
       v-model="state.search"
       @input="searchChanged"
     ></q-search>
@@ -60,5 +59,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="stylus">
+  .row
+    padding: 1em
+  .q-picker-textfield
+    margin-right: 1em
 </style>

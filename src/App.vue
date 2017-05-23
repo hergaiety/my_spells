@@ -1,15 +1,10 @@
 <template>
   <div id="q-app">
     <q-layout class="bg-light">
-      <nav-header-primary
+      <nav-header
         slot="header"
         class="toolbar dark"
-      ></nav-header-primary>
-
-      <nav-header-secondary
-        slot="header"
-        class="toolbar dark"
-      ></nav-header-secondary>
+      ></nav-header>
 
       <div class="layout-view">
         <router-view></router-view>
@@ -28,12 +23,10 @@ import { Loading, Dialog } from 'quasar'
 import Vue from 'vue'
 import 'whatwg-fetch'
 import { state, dispatch } from './store'
-import HeaderPrimary from './components/Headerprimary'
-import HeaderSecondary from './components/Headersecondary'
+import Header from './components/Header'
 import Footer from './components/Footer'
 
-Vue.component('nav-header-primary', HeaderPrimary)
-Vue.component('nav-header-secondary', HeaderSecondary)
+Vue.component('nav-header', Header)
 Vue.component('nav-footer', Footer)
 
 function fetchSuccess (data) {
