@@ -23,6 +23,13 @@
           v-show="state.chosen.length"
         >{{state.chosen.length}}</span>
       </q-tab>
+      <q-tab
+        hidden="true"
+        icon="import_contacts"
+        route="/spell"
+      >
+        Spell
+      </q-tab>
     </q-tabs>
   </footer>
 </template>
