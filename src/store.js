@@ -20,6 +20,10 @@ export function dispatch (action) {
     case 'LOAD_LOCAL_CHOSEN' :
       state.chosen = LocalStorage.get.item('chosen').split(',')
       break
+    case 'WIPE_CHOSEN':
+      state.chosen = []
+      LocalStorage.remove('chosen')
+      break
     case 'CHANGE_CHOSEN':
       if (action.data.want) {
         state.chosen.push(action.data.name)

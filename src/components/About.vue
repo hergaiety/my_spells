@@ -6,6 +6,16 @@
       web-based application to elegantly view spells and save them to your local spellbook.
     </p>
 
+    <h2>Settings</h2>
+    <button
+      class="primary"
+      v-on:click="wipeChosen"
+      :disabled="disableChosen"
+    >
+      <i class="on-left">delete</i>
+      Reset Spellbook
+    </button>
+
     <h2>License</h2>
     <p>
       Open Game License v1.0a Copyright 2000, Wizards of the Coast, Inc.
@@ -30,9 +40,27 @@
 </template>
 
 <script>
+import { Toast } from 'quasar'
+import { dispatch, state } from '../store'
+
 export default {
   data () {
-    return {}
+    return { state }
+  },
+  computed: {
+    disableChosen () {
+      return this.state.chosen.length === 0
+    }
+  },
+  methods: {
+    wipeChosen () {
+      dispatch({
+        type: 'WIPE_CHOSEN'
+      })
+      Toast.create({
+        html: 'Spellbook Reset'
+      })
+    }
   }
 }
 </script>
