@@ -1,8 +1,9 @@
 {
-  "name": "quasar-app",
-  "version": "0.0.1",
-  "description": "A Quasar App",
-  "author": "Your Name",
+  "name": "My Spells",
+  "version": "2.0.0",
+  "description": "My Spells is an open source web-based application to elegantly view spells and save them to your local spellbook.",
+  "author": "Joe Wroten <joe@wroten.me>",
+  "license": "ISC",
   "scripts": {
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
