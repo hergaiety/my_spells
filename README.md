@@ -1,6 +1,18 @@
-# Quasar App
+# My Spells
 
-> A Quasar project
+My Spells is an open source web-based application to elegantly view spells and save them to your local spellbook. 
+
+## License
+
+Open Game License v1.0a Copyright 2000, Wizards of the Coast, Inc.
+
+App contains content from the SRD and is restricted and covered by the OGL. You can find the OGL 1.0a at [ogl.html](./ogl.html) in this app's repo, or [online here](http://www.opengamingfoundation.org/ogl.html). When using said data, please make sure to conform appropriately with the proper licenses and whatnot. 
+
+## Credit
+
+* ephe's [grimoire](https://github.com/ephe/grimoire/) spell list converted json by vorpalhex and cleaned up to meet OGL license standards [labeled under srd_spells](https://github.com/vorpalhex/srd_spells)
+* Built on [Vue.js](https://vuejs.org/) and the [Quasar Framework](http://quasar-framework.org/)
+* Logo magic wand icon by David from the Noun Project 
 
 ## Build Setup
 
@@ -9,11 +21,11 @@
 $ npm install
 
 # serve with hot reload at localhost:8080
-$ quasar dev
+$ npm run dev
 
 # build for production with minification
-$ quasar build
+$ npm run build
 
 # lint code
-$ quasar lint
+$ npm run lint
 ```

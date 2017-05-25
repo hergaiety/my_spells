@@ -3,7 +3,7 @@
     <h1>About</h1>
     <p>
       My Spells is an <a href="https://github.com/sharpshark28/my_spells"><i>code</i> open source</a>
-      web-based application to elegently view spells and save them to your local spellbook.
+      web-based application to elegantly view spells and save them to your local spellbook.
     </p>
 
     <h2>License</h2>
