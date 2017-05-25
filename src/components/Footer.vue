@@ -25,10 +25,15 @@
       </q-tab>
       <q-tab
         hidden="true"
-        icon="import_contacts"
         route="/spell"
       >
         Spell
+      </q-tab>
+      <q-tab
+        hidden="true"
+        route="/about"
+      >
+        About
       </q-tab>
     </q-tabs>
   </footer>
