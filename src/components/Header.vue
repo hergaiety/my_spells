@@ -1,7 +1,9 @@
 <template>
   <div>
     <q-toolbar-title :padding="0">
-      My Spells v2.0 
+      <img class="logo" src="statics/logo.svg" alt="" />
+      My Spells
+      <small>5e Personal Spellbook</small>
     </q-toolbar-title>
 
     <button v-on:click="copy">
@@ -45,3 +47,9 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="stylus">
+  .logo
+    height: 1.25em
+    vertical-align: middle
+</style>

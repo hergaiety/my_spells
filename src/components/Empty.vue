@@ -25,7 +25,7 @@ export default {
 <style scoped lang="stylus">
   .empty
     height: 100%
-    background-image: url('/statics/wand.svg')
+    background-image: url('/statics/empty-bg.svg')
     background-repeat: no-repeat
     background-position: top center
 </style>
