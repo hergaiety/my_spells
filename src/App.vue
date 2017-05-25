@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { Loading, Dialog } from 'quasar'
+import { LocalStorage, Loading, Dialog } from 'quasar'
 import Vue from 'vue'
 import 'whatwg-fetch'
 import { state, dispatch } from './store'
@@ -49,19 +49,29 @@ function fetchFailure (reason) {
   console.error(message, reason)
 }
 
+function fetchSpells () {
+  fetch('./statics/dnd5e.json')
+  .then(response => response.json())
+  .then(fetchSuccess)
+  .catch(fetchFailure)
+  .then(() => { Loading.hide() })
+}
+
 export default {
   data () {
     return { state }
   },
   mounted () {
+    if (LocalStorage.has('chosen')) {
+      dispatch({
+        type: 'LOAD_LOCAL_CHOSEN'
+      })
+    }
+
     if (!this.state.spells.loaded) {
       Loading.show()
 
-      fetch('./statics/dnd5e.json')
-      .then(response => response.json())
-      .then(fetchSuccess)
-      .catch(fetchFailure)
-      .then(() => { Loading.hide() })
+      fetchSpells()
     }
   }
 }

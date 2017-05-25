@@ -1,3 +1,5 @@
+import { LocalStorage } from 'quasar'
+
 export let state = {
   spells: {
     loaded: false,
@@ -15,6 +17,9 @@ export function dispatch (action) {
     case 'SPELLS_RESOLVED':
       state.spells = action.data
       break
+    case 'LOAD_LOCAL_CHOSEN' :
+      state.chosen = LocalStorage.get.item('chosen').split(',')
+      break
     case 'CHANGE_CHOSEN':
       if (action.data.want) {
         state.chosen.push(action.data.name)
@@ -22,6 +27,13 @@ export function dispatch (action) {
       else {
         let index = state.chosen.indexOf(action.data.name)
         if (index >= 0) state.chosen.splice(index, 1)
+      }
+
+      if (state.chosen.length) {
+        LocalStorage.set('chosen', state.chosen.join(','))
+      }
+      else {
+        LocalStorage.remove('chosen')
       }
       break
     case 'SEARCH_CHANGED':
