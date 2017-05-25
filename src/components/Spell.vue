@@ -23,6 +23,22 @@
         <span class="label bg-white text-pink">
           Level {{level}}
         </span>
+
+        <q-checkbox
+          class="float-right pink"
+          v-model="checked"
+          @input="toggle"
+        ></q-checkbox>
+        <i
+          class="bookmark float-right text-yellow pointer"
+          v-if="checked"
+          v-on:click="checked = false"
+        >bookmark</i>
+        <i
+          class="bookmark float-right text-grey-5 pointer"
+          v-else
+          v-on:click="checked = true"
+        >bookmark_border</i>
       </div>
       <ol class="list no-border">
         <li class="item">
@@ -68,7 +84,7 @@
 </template>
 
 <script>
-import { state } from '../store'
+import { dispatch, state } from '../store'
 import { capitalize } from '../utils'
 import Marked from 'marked'
 
@@ -80,6 +96,9 @@ export default {
     state.lastSpell = this.state.spell.data.name
   },
   computed: {
+    checked () {
+      return this.state.chosen.indexOf(this.spell.name) >= 0
+    },
     spell () {
       return this.state.spells.data.find(spell => spell.name === this.$route.params.name)
     },
@@ -100,11 +119,24 @@ export default {
       newDescription = newDescription.replace(/[\s()<>]+\d+d*\d*(th)*[\s()<>]+/gi, o => ` **${o.trim()}** `)
       return Marked(newDescription)
     }
+  },
+  methods: {
+    toggle (want) {
+      dispatch({
+        type: 'CHANGE_CHOSEN',
+        data: {
+          want,
+          name: this.spell.name
+        }
+      })
+    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
+  .pointer
+    cursor: pointer
   .page-spell
     width: 100%
     height: 100%
@@ -129,6 +161,9 @@ export default {
       margin: 12px 0
     .item-content
       margin-left: 50px
+  .bookmark
+    font-size: 1.25em
+    line-height: 1em
   @media screen and (min-height: 800px)
     .card
       position: relative

@@ -13,17 +13,17 @@
     </div>
     <div class="item-secondary">
       <i
-        class="float-left text-primary"
+        class="float-left text-pink"
         v-if="checked"
         v-on:click="checked = false"
       >bookmark</i>
       <i
-        class="float-left"
+        class="float-left text-grey-5"
         v-else
         v-on:click="checked = true"
       >bookmark_border</i>
       <q-checkbox
-        class="float-right"
+        class="float-right pink"
         v-model="checked"
         @input="toggle"
       ></q-checkbox>
@@ -68,7 +68,6 @@ export default {
           name: this.spell.name
         }
       })
-      console.log(state.chosen)
     }
   }
 }
