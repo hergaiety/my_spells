@@ -21,7 +21,7 @@
 <script>
 import Vue from 'vue'
 import { Utils } from 'quasar'
-import Query from '../query'
+import Query from 'json-query-chain'
 import Filter from './Filter'
 import SpellItem from './Spellitem'
 import { state } from '../store'
