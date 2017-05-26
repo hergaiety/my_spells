@@ -41,7 +41,7 @@ export function dispatch (action) {
       }
       break
     case 'SEARCH_CHANGED':
-      state.loadedPagination = 1
+      state.page = 1
       break
   }
 }
