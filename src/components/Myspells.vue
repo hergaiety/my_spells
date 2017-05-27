@@ -8,7 +8,7 @@
       v-else
       title="You haven't chosen any spells"
     >
-      Try <i>bookmark</i> bookmarking spells from the
+      Try <span class="text-pink"><i>bookmark</i> Bookmarking</span> spells from the
       <router-link to="/">all spells page</router-link> to add to your spellbook.
     </page-empty>
   </main>
@@ -34,7 +34,7 @@ export default {
       }
 
       return this.state.chosen.map(chosen => {
-        return this.state.spells.data.find(spell => {
+        return this.state.indexedSpells.find(spell => {
           return spell.name === chosen
         })
       })

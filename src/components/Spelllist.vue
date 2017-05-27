@@ -1,26 +1,25 @@
 <template>
   <div class="spell-list-container">
     <nav-filter></nav-filter>
-    <section class="spell-list list striped no-border" id="spell_list">
+    <section
+      class="spell-list list striped no-border"
+      id="spell_list"
+    >
       <label
         is="spell-item"
         class="item two-lines item-link"
-        v-for="spell in pagedSpells"
+        v-for="spell in filteredSpells"
+        :key="spell.name"
+        :ref="spell.name"
         :spell="spell"
       >
       </label>
-      <q-pagination
-        class="text-center"
-        v-model="state.page"
-        :max="numPages"
-      ></q-pagination>
     </section>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Utils } from 'quasar'
 import Query from 'json-query-chain'
 import Filter from './Filter'
 import SpellItem from './Spellitem'
@@ -31,42 +30,20 @@ Vue.component('spell-item', SpellItem)
 
 export default {
   data () {
-    return {
-      state,
-      perPage: 0
-    }
+    return { state }
   },
-  props: [
-    'spells'
-  ],
+  props: [ 'spells' ],
   mounted () {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.newPerPage)
-    })
-    this.calculateNewPage()
-  },
-  methods: {
-    newPerPage: Utils.debounce(function () {
-      this.calculateNewPage()
-    }, 100),
-    calculateNewPage () {
-      let fontSize = 14
-      this.perPage = Math.floor(window.innerHeight / (fontSize * 5)) - 4
-    }
+    let lastSpellPosition = this.$refs[this.state.lastSpell][0].$el.offsetTop
+    let scrollingPageElement = document.getElementsByClassName('layout-view')[0]
+    scrollingPageElement.scrollTo(0, lastSpellPosition)
   },
   computed: {
-    numPages () {
-      return Math.ceil(this.filteredSpells.length / this.perPage)
-    },
     filteredSpells () {
-      return new Query(this.spells)
+      let spells = this.spells
+      return new Query(spells)
       .search('name', this.state.search)
       .sort(this.state.sortBy)
-      .results
-    },
-    pagedSpells () {
-      return new Query(this.filteredSpells)
-      .paginate(this.state.page, this.perPage)
       .results
     }
   }
