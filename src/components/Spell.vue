@@ -1,21 +1,19 @@
 <template>
   <div class="page-spell">
-    <router-link
-      tag="button"
-      to="/"
+    <button
+      v-go-back=" '/' "
       class="page-back-small primary shadow-1"
     >
       <i>arrow_back</i>
       Back
-    </router-link>
+    </button>
 
-    <router-link
-      tag="button"
-      to="/"
+    <button
+      v-go-back=" '/' "
       class="page-back-big primary circular big shadow-2"
     >
       <i>arrow_back</i>
-    </router-link>
+    </button>
 
     <div class="card bg-white">
       <div class="card-title bg-pink text-white">
@@ -93,7 +91,7 @@ export default {
     return { state }
   },
   mounted () {
-    state.lastSpell = this.state.spell.data.name
+    this.state.lastSpell = this.spell.name
   },
   computed: {
     checked () {

@@ -5,17 +5,27 @@ export let state = {
     loaded: false,
     data: []
   },
+  indexedSpells: [],
   chosen: [],
   search: '',
   sortBy: 'name',
   previousSortBy: 'name',
-  page: 1
+  lastSpell: ''
 }
 
 export function dispatch (action) {
   switch (action.type) {
     case 'SPELLS_RESOLVED':
       state.spells = action.data
+      break
+    case 'SPELLS_CREATE_INDEX':
+      state.indexedSpells = action.data.map(spell => {
+        return {
+          name: spell.name,
+          classes: spell.classes,
+          level: spell.level
+        }
+      })
       break
     case 'LOAD_LOCAL_CHOSEN' :
       state.chosen = LocalStorage.get.item('chosen').split(',')

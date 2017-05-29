@@ -37,6 +37,10 @@ function fetchSuccess (data) {
       loaded: true
     }
   })
+  dispatch({
+    type: 'SPELLS_CREATE_INDEX',
+    data
+  })
 }
 
 function fetchFailure (reason) {
@@ -63,9 +67,7 @@ export default {
   },
   mounted () {
     if (LocalStorage.has('chosen')) {
-      dispatch({
-        type: 'LOAD_LOCAL_CHOSEN'
-      })
+      dispatch({type: 'LOAD_LOCAL_CHOSEN'})
     }
 
     if (!this.state.spells.loaded) {

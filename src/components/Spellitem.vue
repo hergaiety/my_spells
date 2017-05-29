@@ -11,22 +11,15 @@
         {{classes}}
       </div>
     </div>
-    <div class="item-secondary">
+    <div class="item-secondary" v-on:click="toggle">
       <i
-        class="float-left text-pink"
+        class="float-left text-pink bookmark checked"
         v-if="checked"
-        v-on:click="checked = false"
       >bookmark</i>
       <i
-        class="float-left text-grey-5"
+        class="float-left text-grey-7 bookmark"
         v-else
-        v-on:click="checked = true"
       >bookmark_border</i>
-      <q-checkbox
-        class="float-right pink"
-        v-model="checked"
-        @input="toggle"
-      ></q-checkbox>
     </div>
   </div>
 </template>
@@ -60,11 +53,11 @@ export default {
     openSpell (event) {
       this.$router.push('/spell/' + this.spell.name)
     },
-    toggle (want) {
+    toggle () {
       dispatch({
         type: 'CHANGE_CHOSEN',
         data: {
-          want,
+          want: !this.checked,
           name: this.spell.name
         }
       })
@@ -76,4 +69,18 @@ export default {
 <style scoped lang="stylus">
   .item-secondary
     width: 50px
+    height: 50px
+    margin: 0
+    padding: 12px
+    .bookmark
+      transition: transform .25s ease
+    &:hover,
+    &:target
+      .bookmark
+        transform: scale(1.5)
+      .bookmark:not(.checked)
+        color: yellow !important
+    &:active
+      .bookmark:not(.checked)
+        color: deeppink !important
 </style>

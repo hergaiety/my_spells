@@ -1,8 +1,8 @@
 <template>
   <main>
     <spell-list
-      v-if="state.spells.data.length"
-      :spells="state.spells.data"
+      v-if="state.indexedSpells.length"
+      :spells="state.indexedSpells"
     ></spell-list>
     <page-empty
       v-else
