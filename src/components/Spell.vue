@@ -92,9 +92,13 @@ export default {
     return { state }
   },
   mounted () {
+    let scrollingPageElement = document.getElementsByClassName('layout-view')[0]
+    scrollingPageElement.scrollTop = 0
+
     if (this.state.spells.loaded === false) {
       Loading.show()
     }
+
     this.state.lastSpell = this.spell.id
   },
   computed: {

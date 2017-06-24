@@ -36,7 +36,7 @@ export default {
   mounted () {
     let lastSpellPosition = this.$refs[this.state.lastSpell][0].$el.offsetTop
     let scrollingPageElement = document.getElementsByClassName('layout-view')[0]
-    scrollingPageElement.scrollTo(0, lastSpellPosition)
+    scrollingPageElement.scrollTop = lastSpellPosition
   },
   computed: {
     filteredSpells () {
