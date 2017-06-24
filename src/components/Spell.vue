@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { Loading } from 'quasar'
 import { dispatch, state } from '../store'
 import { capitalize } from '../utils'
 import Marked from 'marked'
@@ -91,14 +92,17 @@ export default {
     return { state }
   },
   mounted () {
-    this.state.lastSpell = this.spell.name
+    if (this.state.spells.loaded === false) {
+      Loading.show()
+    }
+    this.state.lastSpell = this.spell.id
   },
   computed: {
     checked () {
-      return this.state.chosen.indexOf(this.spell.name) >= 0
+      return this.state.chosen.indexOf(this.spell.id) >= 0
     },
     spell () {
-      return this.state.spells.data.find(spell => spell.name === this.$route.params.name)
+      return this.state.spells.data.find(spell => spell.id === this.$route.params.id)
     },
     level () {
       return this.spell.level.toLowerCase() === 'cantrip' ? 'C' : this.spell.level
@@ -124,7 +128,7 @@ export default {
         type: 'CHANGE_CHOSEN',
         data: {
           want,
-          name: this.spell.name
+          id: this.spell.id
         }
       })
     }

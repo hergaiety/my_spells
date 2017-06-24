@@ -40,7 +40,7 @@ export default {
       return this.spell.classes.map(cla => capitalize(cla)).join(', ')
     },
     checked () {
-      return this.state.chosen.indexOf(this.spell.name) >= 0
+      return this.state.chosen.indexOf(this.spell.id) >= 0
     }
   },
   data () {
@@ -51,14 +51,14 @@ export default {
   ],
   methods: {
     openSpell (event) {
-      this.$router.push('/spell/' + this.spell.name)
+      this.$router.push('/spell/' + this.spell.id)
     },
     toggle () {
       dispatch({
         type: 'CHANGE_CHOSEN',
         data: {
           want: !this.checked,
-          name: this.spell.name
+          id: this.spell.id
         }
       })
     }

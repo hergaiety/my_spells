@@ -35,7 +35,7 @@ export default {
 
       return this.state.chosen.map(chosen => {
         return this.state.indexedSpells.find(spell => {
-          return spell.name === chosen
+          return spell.id === chosen
         })
       })
     }
