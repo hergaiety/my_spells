@@ -37,10 +37,6 @@ function fetchSuccess (data) {
       loaded: true
     }
   })
-  dispatch({
-    type: 'SPELLS_CREATE_INDEX',
-    data
-  })
 }
 
 function fetchFailure (reason) {
@@ -54,7 +50,7 @@ function fetchFailure (reason) {
 }
 
 function fetchSpells () {
-  fetch('./statics/dnd5e.json')
+  fetch('./statics/spells.json')
   .then(response => response.json())
   .then(fetchSuccess)
   .catch(fetchFailure)
@@ -71,8 +67,6 @@ export default {
     }
 
     if (!this.state.spells.loaded) {
-      Loading.show()
-
       fetchSpells()
     }
   }

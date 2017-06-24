@@ -23,7 +23,7 @@ export default new VueRouter({
   routes: [
     { path: '/', component: load('Index') }, // Default
     { path: '/my', component: load('Myspells') },
-    { path: '/spell/:name', component: load('Spell') },
+    { path: '/spell/:id', component: load('Spell') },
     { path: '/about', component: load('About') },
     { path: '*', component: load('Error404') } // Not found
   ]

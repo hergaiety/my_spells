@@ -1,6 +1,8 @@
 .DS_Store
+tmp/
 node_modules/
 dist/
+src/statics/spells.json
 npm-debug.log
 npm-debug.log.*
 selenium-debug.log

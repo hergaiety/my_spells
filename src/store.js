@@ -1,11 +1,12 @@
 import { LocalStorage } from 'quasar'
+import indexedSpells from '../tmp/spells_index'
 
 export let state = {
+  indexedSpells,
   spells: {
     loaded: false,
     data: []
   },
-  indexedSpells: [],
   chosen: [],
   search: '',
   sortBy: 'name',
@@ -18,15 +19,6 @@ export function dispatch (action) {
     case 'SPELLS_RESOLVED':
       state.spells = action.data
       break
-    case 'SPELLS_CREATE_INDEX':
-      state.indexedSpells = action.data.map(spell => {
-        return {
-          name: spell.name,
-          classes: spell.classes,
-          level: spell.level
-        }
-      })
-      break
     case 'LOAD_LOCAL_CHOSEN' :
       state.chosen = LocalStorage.get.item('chosen').split(',')
       break
@@ -36,10 +28,10 @@ export function dispatch (action) {
       break
     case 'CHANGE_CHOSEN':
       if (action.data.want) {
-        state.chosen.push(action.data.name)
+        state.chosen.push(action.data.id)
       }
       else {
-        let index = state.chosen.indexOf(action.data.name)
+        let index = state.chosen.indexOf(action.data.id)
         if (index >= 0) state.chosen.splice(index, 1)
       }
 

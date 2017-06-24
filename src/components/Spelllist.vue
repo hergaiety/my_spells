@@ -9,8 +9,8 @@
         is="spell-item"
         class="item two-lines item-link"
         v-for="spell in filteredSpells"
-        :key="spell.name"
-        :ref="spell.name"
+        :key="spell.id"
+        :ref="spell.id"
         :spell="spell"
       >
       </label>
