@@ -3,13 +3,15 @@
     <div class="item-primary">
       {{level}}
     </div>
-    <div class="item-content has-secondary" v-on:click="openSpell">
-      <div>
-        {{spell.name}}
-      </div>
-      <div>
-        {{classes}}
-      </div>
+    <div class="item-content has-secondary">
+      <router-link :to="spell.link">
+        <div>
+          {{spell.name}}
+        </div>
+        <div>
+          {{classes}}
+        </div>
+      </router-link>
     </div>
     <div class="item-secondary" v-on:click="toggle">
       <i
@@ -50,9 +52,6 @@ export default {
     'spell'
   ],
   methods: {
-    openSpell (event) {
-      this.$router.push('/spell/' + this.spell.id)
-    },
     toggle () {
       dispatch({
         type: 'CHANGE_CHOSEN',
@@ -67,6 +66,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  .item-content a
+    color: black
+    div:not(:first-of-type)
+      color: rgba(0, 0, 0, .54)
   .item-secondary
     width: 50px
     height: 50px
