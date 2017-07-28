@@ -5,12 +5,15 @@
     </div>
     <div class="item-content has-secondary">
       <router-link :to="spell.link">
-        <div>
-          {{spell.name}}
-        </div>
-        <div>
-          {{classes}}
-        </div>
+        <span class="spell-link-alignment">
+          <span class="spell-name">
+            {{spell.name}}
+          </span>
+          <br />
+          <span class="spell-classes">
+            {{classes}}
+          </span>
+        </span>
       </router-link>
     </div>
     <div class="item-secondary" v-on:click="toggle">
@@ -66,10 +69,19 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .item-content a
-    color: black
-    div:not(:first-of-type)
-      color: rgba(0, 0, 0, .54)
+  .spell-classes
+    color: rgba(0, 0, 0, .54)
+  .item.two-lines > .item-content
+    height: 100%
+    padding: 0
+    a
+      color: black
+      display: table
+      height: 100%
+      width: 100%
+      .spell-link-alignment
+        display: table-cell
+        vertical-align: middle
   .item-secondary
     width: 50px
     height: 50px
