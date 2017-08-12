@@ -34,9 +34,11 @@ export default {
   },
   props: [ 'spells' ],
   mounted () {
-    let lastSpellPosition = this.$refs[this.state.lastSpell][0].$el.offsetTop
-    let scrollingPageElement = document.getElementsByClassName('layout-view')[0]
-    scrollingPageElement.scrollTop = lastSpellPosition
+    if (this.state.lastSpell) {
+      let lastSpellPosition = this.$refs[this.state.lastSpell][0].$el.offsetTop
+      let scrollingPageElement = document.getElementsByClassName('layout-view')[0]
+      scrollingPageElement.scrollTop = lastSpellPosition
+    }
   },
   computed: {
     filteredSpells () {

@@ -24,13 +24,13 @@
         >{{state.chosen.length}}</span>
       </q-tab>
       <q-tab
-        hidden="true"
+        hidden
         route="/spell"
       >
         Spell
       </q-tab>
       <q-tab
-        hidden="true"
+        hidden
         route="/about"
       >
         About
