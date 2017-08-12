@@ -52,4 +52,6 @@ export default {
 <style scoped lang="stylus">
   footer .q-tabs
     width: 100%
+    .pointing-left:before
+        transform: translateX(-50%) translateY(-50%) rotate(225deg)
 </style>
