@@ -1,0 +1,24 @@
+{
+    "name": "my_spells_app",
+    "displayName": "My Spells - Cordova",
+    "version": "1.0.0",
+    "description": "My Spells is an open source web-based application to elegantly view spells and save them to your local spellbook.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Joe Wroten <joe@wroten.me>",
+    "license": "ISC",
+    "dependencies": {
+        "cordova-android": "^6.2.3",
+        "cordova-plugin-whitelist": "^1.3.2"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {}
+        },
+        "platforms": [
+            "android"
+        ]
+    }
+}

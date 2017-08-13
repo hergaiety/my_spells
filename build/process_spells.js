@@ -1,5 +1,7 @@
 'use strict'
 
+const args = require('yargs').argv
+
 const fs = require('fs')
 const spells = require('../src/spells_original.json')
 
@@ -13,6 +15,8 @@ const hashCode = function (str) {
   }
   return hash
 }
+
+console.log('Processing spells...', args.web ? 'for web!' : 'for apps!')
 
 let spellsWithIDs = spells.map(spell => {
   spell.id = hashCode(spell.name).toString()
@@ -29,11 +33,21 @@ let indexedSpells = spellsWithIDs.map(spell => {
   }
 })
 
-let dirs = ['tmp']
+let dirs = ['dist', 'dist/statics', 'src/tmp']
 dirs.forEach(dir => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir)
   }
 })
-fs.writeFileSync('./src/statics/spells.json', JSON.stringify(spellsWithIDs))
-fs.writeFileSync('./tmp/spells_index.js', `export default ${JSON.stringify(indexedSpells)};`)
+
+fs.writeFileSync('./src/tmp/spells_index.js', `export default ${JSON.stringify(indexedSpells)};`)
+
+if (args.web) {
+  fs.writeFileSync('./dist/statics/spells.json', JSON.stringify(spellsWithIDs));
+  fs.writeFileSync('./src/tmp/spells.js', `export default []; // Will fetch from web`)
+}
+else {
+  fs.writeFileSync('./src/tmp/spells.js', `export default ${JSON.stringify(spellsWithIDs)};`)
+}
+
+console.log('Processed spells')

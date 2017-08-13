@@ -21,10 +21,16 @@ App contains content from the SRD and is restricted and covered by the OGL. You 
 $ npm install
 
 # serve with hot reload at localhost:8080
-$ npm run dev
+$ npm run dev_web
 
 # build for production with minification
-$ npm run build
+$ npm run build_web # or build_app
+
+# build cordova (android, iOS potentially in future) release
+$ npm run build_app_cordova
+# sign apk with android studio or jarsigner
+# install on device
+$ adp install cordova/platforms/android/build/apk/<BUILT-FILE.apk>
 
 # lint code
 $ npm run lint
