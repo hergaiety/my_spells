@@ -1,6 +1,5 @@
 process.env.NODE_ENV = 'development'
 
-require('./generate_index')
 require('colors')
 
 var

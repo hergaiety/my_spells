@@ -25,6 +25,7 @@ import 'whatwg-fetch'
 import { state, dispatch } from './store'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import bakedInSpells from './tmp/spells'
 
 Vue.component('nav-header', Header)
 Vue.component('nav-footer', Footer)
@@ -50,11 +51,18 @@ function fetchFailure (reason) {
 }
 
 function fetchSpells () {
-  fetch('./statics/spells.json')
-  .then(response => response.json())
-  .then(fetchSuccess)
-  .catch(fetchFailure)
-  .then(() => { Loading.hide() })
+  console.log('WOW DATA', bakedInSpells)
+  if (bakedInSpells.length) {
+    fetchSuccess(bakedInSpells)
+    Loading.hide()
+  }
+  else {
+    fetch('./statics/spells.json')
+    .then(response => response.json())
+    .then(fetchSuccess)
+    .catch(fetchFailure)
+    .then(() => { Loading.hide() })
+  }
 }
 
 export default {

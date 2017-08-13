@@ -1,5 +1,5 @@
 import { LocalStorage } from 'quasar'
-import indexedSpells from '../tmp/spells_index'
+import indexedSpells from './tmp/spells_index'
 
 export let state = {
   indexedSpells,

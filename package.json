@@ -1,13 +1,16 @@
 {
   "name": "my_spells",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "My Spells is an open source web-based application to elegantly view spells and save them to your local spellbook.",
   "author": "Joe Wroten <joe@wroten.me>",
   "license": "ISC",
   "scripts": {
     "clean": "node build/script.clean.js",
-    "dev": "node build/script.dev.js",
-    "build": "node build/script.build.js",
+    "dev_web": "node build/process_spells.js --web && node build/script.dev.js ",
+    "dev_app_cordova": "cd cordova && cordova run --device android",
+    "build_web": "node build/process_spells.js --web && node build/script.build.js",
+    "build_app": "node build/process_spells.js && node build/script.build.js",
+    "build_app_cordova": "cd cordova && cordova build --release",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
@@ -67,6 +70,7 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.17.0",
     "webpack-merge": "^4.0.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "yargs": "^8.0.2"
   }
 }
