@@ -8,13 +8,6 @@
       Back
     </button>
 
-    <button
-      v-go-back=" '/' "
-      class="page-back-big primary circular big shadow-2"
-    >
-      <i>arrow_back</i>
-    </button>
-
     <div class="card bg-white">
       <div class="card-title bg-pink text-white">
         {{spell.name}}
@@ -170,17 +163,4 @@ export default {
   .bookmark
     font-size: 1.25em
     line-height: 1em
-  @media screen and (min-height: 800px)
-    .card
-      position: relative
-      top: 50%
-      transform: translateY(-50%)
-    .page-back-big
-      display: block
-      position: absolute
-      top: 1rem
-      left: 1rem
-      z-index: 1
-    .page-back-small
-      display: none
 </style>
