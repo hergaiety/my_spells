@@ -1,7 +1,7 @@
 <template>
   <div v-bind:class="{'checked': checked}">
     <div class="item-primary">
-      {{level}}
+      {{spell.level}}
     </div>
     <div class="item-content has-secondary">
       <router-link :to="spell.link">
@@ -35,9 +35,6 @@ import { capitalize } from '../utils'
 
 export default {
   computed: {
-    level () {
-      return this.spell.level.toLowerCase() === 'cantrip' ? '0' : this.spell.level.charAt(0)
-    },
     school () {
       return capitalize(this.spell.school)
     },

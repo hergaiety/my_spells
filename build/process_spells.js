@@ -28,7 +28,7 @@ let indexedSpells = spellsWithIDs.map(spell => {
     id: spell.id,
     name: spell.name,
     classes: spell.classes,
-    level: spell.level,
+    level: spell.level.toLowerCase() === 'cantrip' ? 0 : parseInt(spell.level),
     link: '/spell/' + spell.id,
   }
 })
