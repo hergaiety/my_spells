@@ -2,9 +2,8 @@
 
 My Spells is an open source web-based application to elegantly view spells and save them to your local spellbook. 
 
-![Version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.5&x2=0) [![Code Climate](https://img.shields.io/codeclimate/github/sharpshark28/my_spells.svg)](https://codeclimate.com/github/sharpshark28/my_spells)
+[![PlayStore](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=io.cordova.myspells)
 
-[![PlayStore](https://mrpatiwi.github.io/app-badges/playstore.png)](https://play.google.com/store/apps/details?id=io.cordova.myspells)
 ## License
 
 Open Game License v1.0a Copyright 2000, Wizards of the Coast, Inc.
